@@ -28,7 +28,6 @@ import ngyb.googleplay.utils.Constant;
 public class AppDetailGalleryView extends RelativeLayout {
     @BindView(R.id.image_container)
     LinearLayout imageContainer;
-    private static final String TAG = "AppDetailGalleryView";
 
     public AppDetailGalleryView(Context context) {
         this(context, null);
@@ -56,7 +55,6 @@ public class AppDetailGalleryView extends RelativeLayout {
             } else {
                 imageView.setPadding(padding, padding, 0, padding);
             }
-            Log.e(TAG, "bindView: " + (Constant.IMAGE_URL + url));
             Glide.with(getContext()).load(Constant.IMAGE_URL + url).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).into(imageView);
             //加入图片的容器
             imageContainer.addView(imageView);

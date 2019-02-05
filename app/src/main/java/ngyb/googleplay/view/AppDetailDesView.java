@@ -23,7 +23,6 @@ import ngyb.googleplay.utils.AnimationUtils;
  * 时间: 2018/5/4 21:31
  */
 public class AppDetailDesView extends RelativeLayout {
-    private static final String TAG = "AppDetailDesView";
     @BindView(R.id.app_desc)
     TextView appDesc;
     @BindView(R.id.app_name)
@@ -49,7 +48,6 @@ public class AppDetailDesView extends RelativeLayout {
 
         //绘制流程没有走,测量没有走就没有高度
         expandHeight = appDesc.getMeasuredHeight();
-        Log.e(TAG, "AppDetailDesView: " + expandHeight);
         //视图树的观察者监听绘制流程中布局的完成
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

@@ -37,7 +37,6 @@ public class AppItemView extends RelativeLayout {
     CircleDownloadView circleDownloadView;
     @BindView(R.id.app_desc)
     TextView appDesc;
-    private static final String TAG = "AppItemView";
 
     public AppItemView(Context context) {
         this(context, null);
@@ -57,7 +56,6 @@ public class AppItemView extends RelativeLayout {
      * @param appItemBean 当listview滚动,绑定条目
      */
     public void bindView(AppItemBean appItemBean) {
-        Log.e(TAG, "bindView: " + (Constant.IMAGE_URL + appItemBean.getIconUrl()));
         Glide.with(getContext()).load(Constant.IMAGE_URL + appItemBean.getIconUrl()).into(appIcon);
         appName.setText(appItemBean.getName());
         ratingBar.setRating(appItemBean.getStars());

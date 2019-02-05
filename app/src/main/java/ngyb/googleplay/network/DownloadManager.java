@@ -30,7 +30,6 @@ import okhttp3.Response;
  * 下载管理器,管理所有的下载相关的业务逻辑
  */
 public class DownloadManager {
-    private static final String TAG = "DownloadManager";
     public static final int STATE_UN_DOWNLOAD = 0; //未下载
     public static final int STATE_DOWNLOADING = 1; //下载中
     public static final int STATE_PAUSE = 2; //暂停下载
@@ -265,13 +264,11 @@ public class DownloadManager {
                         //将buffer字节写入输出流
                         fileOutputStream.write(buffer, 0, len);
                         downloadInfo.downloadSize += len;//计算已经下载字节大小
-                        Log.e(TAG, "run: " + downloadInfo.downloadSize);
                         //计算进度0--100
                         int progress = (int) (downloadInfo.downloadSize * 1.0f / downloadInfo.apkSize * 100);
                         //进度变大才进行刷新绘制,优化
                         if (progress > downloadInfo.progress) {
                             downloadInfo.progress = progress;
-                            Log.e(TAG, "run: " + progress);
                             downloadInfo.downloadStatus = STATE_DOWNLOADING;//更新状态,正在下载的状态
 //                            downloadInfo.listener.onUpdate(downloadInfo);
                             notifyDownloadInfoChange(downloadInfo);

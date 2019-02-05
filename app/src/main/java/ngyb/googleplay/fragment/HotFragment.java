@@ -28,7 +28,6 @@ import retrofit2.Response;
  * 时间: 2018/5/5 13:04
  */
 public class HotFragment extends BaseFragment {
-    private static final String TAG = "HotFragment";
     private List<String> dataList;
 
     @Override
@@ -49,7 +48,6 @@ public class HotFragment extends BaseFragment {
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                Log.e(TAG, "onFailure: " + t.getLocalizedMessage());
                 onDataLoadFailed();
             }
         });

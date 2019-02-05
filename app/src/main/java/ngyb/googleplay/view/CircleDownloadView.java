@@ -30,7 +30,6 @@ import ngyb.googleplay.network.UpdateDownloadInfoListener;
  * 时间: 2018/5/2 22:25
  */
 public class CircleDownloadView extends FrameLayout implements UpdateDownloadInfoListener {
-    private static final String TAG = "CircleDownloadView";
     @BindView(R.id.download_icon)
     ImageView downloadIcon;
     @BindView(R.id.download_text)
@@ -73,7 +72,6 @@ public class CircleDownloadView extends FrameLayout implements UpdateDownloadInf
             int top = downloadIcon.getTop() - 5;
             int right = downloadIcon.getRight() + 5;
             int bottom = downloadIcon.getBottom() + 5;
-            Log.e(TAG, "onDraw: " + left + "=" + top + "=" + right + "=" + bottom);
             rectF.set(left, top, right, bottom);
             float startAngle = -90;
 //            float sweepAngle = 45;

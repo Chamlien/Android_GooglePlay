@@ -25,7 +25,6 @@ import retrofit2.Response;
  * 时间: 2018/5/5 12:55
  */
 public class HomeFragment extends BaseAppListFragment {
-    private static final String TAG = "HomeFragment";
     private List<String> pictures;
 
     @Override
@@ -67,7 +66,6 @@ public class HomeFragment extends BaseAppListFragment {
             @Override
             public void onFailure(Call<HomeBean> call, Throwable t) {
                 Toasty.error(getContext(), "failed" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "onFailure: " + t.getLocalizedMessage());
                 onDataLoadFailed();
             }
         });

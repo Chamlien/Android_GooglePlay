@@ -26,7 +26,6 @@ public class CategoryInfoItemView extends RelativeLayout {
     ImageView categoryInfoImage;
     @BindView(R.id.category_info_title)
     TextView categoryInfoTitle;
-    private static final String TAG = "CategoryInfoItemView";
 
     public CategoryInfoItemView(Context context) {
         this(context, null);
@@ -44,7 +43,6 @@ public class CategoryInfoItemView extends RelativeLayout {
 
     public void bindView(String name, String url) {
         categoryInfoTitle.setText(name);
-        Log.e(TAG, "bindView: "+(Constant.IMAGE_URL + url) );
         Glide.with(getContext()).load(Constant.IMAGE_URL + url).into(categoryInfoImage);
     }
 }

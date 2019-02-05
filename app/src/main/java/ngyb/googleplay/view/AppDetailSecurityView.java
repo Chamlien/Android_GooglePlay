@@ -28,7 +28,6 @@ import ngyb.googleplay.utils.Constant;
  * 时间: 2018/5/4 22:03
  */
 public class AppDetailSecurityView extends RelativeLayout {
-    private static final String TAG = "AppDetailSecurityView";
     @BindView(R.id.tag_container)
     LinearLayout tagContainer;
     @BindView(R.id.arrow)
@@ -59,7 +58,6 @@ public class AppDetailSecurityView extends RelativeLayout {
                 getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 //获取正常情况下容器高度,即展开后的高度
                 expandHeight = descContainer.getMeasuredHeight();
-                Log.e(TAG, "onGlobalLayout: " + expandHeight);
                 //初始化高度为0
                 ViewGroup.LayoutParams layoutParams = descContainer.getLayoutParams();
                 layoutParams.height = 0;

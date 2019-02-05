@@ -23,7 +23,6 @@ import ngyb.googleplay.utils.Constant;
  * 时间: 2018/5/5 10:42
  */
 public class SubjectItemView extends RelativeLayout {
-    private static final String TAG = "SubjectItemView";
     @BindView(R.id.subject_item_image)
     ImageView subjectItemImage;
     @BindView(R.id.subject_item_title)
@@ -45,7 +44,6 @@ public class SubjectItemView extends RelativeLayout {
 
     public void bindView(SubjectItemBean subjectItemBean) {
         subjectItemTitle.setText(subjectItemBean.getDes());
-        Log.e(TAG, "bindView: " + (Constant.IMAGE_URL + subjectItemBean.getUrl()));
         Glide.with(getContext()).load(Constant.IMAGE_URL + subjectItemBean.getUrl()).into(subjectItemImage);
     }
 }

@@ -15,7 +15,6 @@ import ngyb.googleplay.factory.FragmentFactory;
  * 时间: 2018/5/5 11:13
  */
 public class MainAdapter extends FragmentPagerAdapter {
-    private static final String TAG = "MainAdapter";
     private final String[] titles;
 
     public MainAdapter(FragmentManager fm, String[] titles) {

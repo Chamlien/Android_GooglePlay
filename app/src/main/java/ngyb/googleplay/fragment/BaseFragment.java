@@ -27,7 +27,6 @@ import ngyb.googleplay.R;
  * 1.布局  2.开始加载数据  3加载成功  4 加载失败  5 点击重试
  */
 public abstract class BaseFragment extends Fragment {
-    private static final String TAG = "BaseFragment";
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.retry)
@@ -67,7 +66,6 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        Log.e(TAG, "onDestroyView: ");
     }
 
     /**

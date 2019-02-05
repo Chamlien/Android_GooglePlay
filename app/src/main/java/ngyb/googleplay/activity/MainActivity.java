@@ -29,7 +29,6 @@ import ngyb.googleplay.network.DownloadManager;
 
 
 public class MainActivity extends BaseActivity {
-
     @BindView(R.id.tool_bar)
     Toolbar toolBar;
     @BindView(R.id.tab_layout)
@@ -40,7 +39,6 @@ public class MainActivity extends BaseActivity {
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private String[] titles;
 
@@ -64,7 +62,7 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //关闭侧滑菜单
                 drawerLayout.closeDrawer(Gravity.START);
-                return true;
+                return false;
             }
         });
         //检查是否有写磁盘的权限
