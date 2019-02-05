@@ -70,4 +70,9 @@ public class AppDeatilFragment extends BaseFragment {
         });
         return inflate;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

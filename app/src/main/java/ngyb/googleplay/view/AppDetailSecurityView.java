@@ -2,7 +2,6 @@ package ngyb.googleplay.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -19,7 +18,7 @@ import butterknife.OnClick;
 import ngyb.googleplay.R;
 import ngyb.googleplay.bean.AppDetailBean;
 import ngyb.googleplay.utils.AnimationUtils;
-import ngyb.googleplay.utils.Constant;
+import ngyb.googleplay.constant.Constant;
 
 /**
  * 作者：南宫燚滨

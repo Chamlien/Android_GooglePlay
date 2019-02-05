@@ -45,7 +45,6 @@ public abstract class BaseLoadMoreListAdapter<T> extends BaseListAdapter<T> {
         return 2;
     }
 
-
     @Override
     void onBindItemView(View itemView, int position) {
         if (getItemViewType(position) == ITEM_TYPE_ONE) {

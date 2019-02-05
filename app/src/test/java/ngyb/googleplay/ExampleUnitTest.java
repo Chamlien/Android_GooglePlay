@@ -14,4 +14,14 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void test() {
+        Teacher teacher = new Teacher();
+        Student student = new Student();
+        Student student1 = new Student();
+        teacher.addObserver(student);
+        teacher.addObserver(student1);
+        teacher.publishMessage();
+    }
 }

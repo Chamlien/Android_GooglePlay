@@ -8,7 +8,7 @@ import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.IOException;
 
-import ngyb.googleplay.utils.Constant;
+import ngyb.googleplay.constant.Constant;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

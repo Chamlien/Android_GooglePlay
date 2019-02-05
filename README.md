@@ -7,6 +7,10 @@
 
 
 # 服务器搭建 #
+
+[服务器你代码] (https://gitee.com/nangongyibin/Java_GooglePlayServer](https://gitee.com/nangongyibin/Java_GooglePlayServer) 
+
+
 * 文件说明
 	* GooglePlayServer:java ee工程,我们的服务器
 	* GooglePlayServer.war:java ee工程的war包形式
@@ -17,12 +21,12 @@
 	* war包方式:
 		1. 把war放到tomact的webapps目录下面就可以,然后启动tomcat会自动解压war包.
 		2. 启动tomcat,自动解压war包,并运行程序 
-		3. 修改`webapps\GooglePlayServer\WEB-INF\classes`目录下system.properties为`dir=C:\\Users\\Leon\\Desktop\\GooglePlay\\server`(`WebInfos`所在的目录),需要注意要么用"/"或者"\\\"
+		3. 修改`webapps\GooglePlayServer\WEB-INF\classes`目录下system.properties为`dir=D:/WorkSpace/GooglePlayServer/resource`(`WebInfos`所在的目录),需要注意要么用"/"或者"\\\"
 		4. 在pc和手机上分别验证
 
  	* 源码形式.
 		1. 用java ee 版eclipse导入工程GooglePlayServer.
-		2. 修改目录下system.properties为`dir=C:\\Users\\Leon\\Desktop\\GooglePlay\\server`(`WebInfos`所在的目录),需要注意要么用"/"或者"\\\"
+		2. 修改目录下system.properties为`dir=D:/WorkSpace/GooglePlayServer/resource`(`WebInfos`所在的目录),需要注意要么用"/"或者"\\\"
 		3. 部署java ee工程到tomcat,然后运行
 		4. 在pc和手机上分别验证。
 
@@ -40,69 +44,64 @@
 
 ## 布局 ##
 
-	<?xml version="1.0" encoding="utf-8"?>
-	<android.support.v4.widget.DrawerLayout
+    <?xml version="1.0" encoding="utf-8"?>
+	<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:app="http://schemas.android.com/apk/res-auto"
+	    xmlns:tools="http://schemas.android.com/tools"
 	    android:id="@+id/drawer_layout"
-	    xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:fitsSystemWindows="true"
-	    xmlns:app="http://schemas.android.com/apk/res-auto">
+	    tools:context=".activity.MainActivity">
 	
-	    <!-- Content -->
-	    <include layout="@layout/main_content"/>
-	    <!-- Drawer -->
+	    <!--<TextView-->
+	    <!--android:layout_gravity="start"-->
+	    <!--android:background="@color/colorPrimary"-->
+	    <!--android:layout_width="match_parent"-->
+	    <!--android:layout_height="match_parent" -->
+	    <!--android:text="Hello World!"/>-->
+	    <include layout="@layout/main_content" />
+	
 	    <android.support.design.widget.NavigationView
-	        android:id="@+id/navigation"
-	        android:layout_width="wrap_content"
+	        android:id="@+id/navigation_view"
+	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
 	        android:layout_gravity="start"
-	        app:headerLayout="@layout/drawer_header"
-	        app:menu="@menu/drawer_main"/>
-	
+	        app:headerLayout="@layout/nav_header"
+	        app:menu="@menu/drawer_main"></android.support.design.widget.NavigationView>
 	</android.support.v4.widget.DrawerLayout>
-
-
 
 ## DrawLayout ##
 在DrawerLayout出现之前，我们需要做侧滑菜单时，不得不自己实现一个或者使用Github上的开源的项目SlidingMenu，也许是Google也看到了SlidingMenu的强大之处，于是在Android的后期版本中添加了DrawerLayout来实现SlidingMenu同样功能的组件，而且为了兼容早期版本，将其添加在android,support.v4包下。
 
 
 ### 布局 ###
-	<?xml version="1.0" encoding="utf-8"?>
-	<android.support.v4.widget.DrawerLayout
+
+    <?xml version="1.0" encoding="utf-8"?>
+	<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:app="http://schemas.android.com/apk/res-auto"
+	    xmlns:tools="http://schemas.android.com/tools"
 	    android:id="@+id/drawer_layout"
-	    xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent">
+	    android:layout_height="match_parent"
+	    android:fitsSystemWindows="true"
+	    tools:context=".activity.MainActivity">
 	
-	    <TextView
-	        android:id="@+id/content"
+	    <!--<TextView-->
+	    <!--android:layout_gravity="start"-->
+	    <!--android:background="@color/colorPrimary"-->
+	    <!--android:layout_width="match_parent"-->
+	    <!--android:layout_height="match_parent" -->
+	    <!--android:text="Hello World!"/>-->
+	    <include layout="@layout/main_content" />
+	
+	    <android.support.design.widget.NavigationView
+	        android:id="@+id/navigation_view"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
-	        android:gravity="center"
-	        android:text="内容"/>
-	
-	    <TextView
-	        android:id="@+id/left"
-	        android:layout_width="200dp"
-	        android:layout_height="match_parent"
 	        android:layout_gravity="start"
-	        android:textColor="@android:color/white"
-	        android:text="左侧菜单"
-	        android:gravity="center"
-	        android:background="@android:color/holo_green_dark"/>
-	
-	    <TextView
-	        android:id="@+id/right"
-	        android:layout_width="200dp"
-	        android:layout_height="match_parent"
-	        android:layout_gravity="end"
-	        android:text="右侧菜单"
-	        android:gravity="center"
-	        android:textColor="@android:color/white"
-	        android:background="@android:color/holo_blue_dark"/>
-	
+	        app:headerLayout="@layout/nav_header"
+	        app:menu="@menu/drawer_main"></android.support.design.widget.NavigationView>
 	</android.support.v4.widget.DrawerLayout>
 
 >使用layout_gravity属性来控制是左侧还是右侧菜单
@@ -114,60 +113,61 @@
 DrawerLayout里面的菜单布局我们可以自己定义，但谷歌也提供的相应的控件NavigationView，方便开发者完成菜单布局。
 
 	//需添加依赖	
-	compile 'com.android.support:design:25.3.0'
+    implementation 'com.android.support:design:28.0.0'
 
->app:headerLayout="@layout/drawer_header" 定义菜单的头布局
+>        app:headerLayout="@layout/nav_header" 定义菜单的头布局
 >
->app:menu="@menu/drawer_main" 定义菜单选项
+>        app:menu="@menu/drawer_main" 定义菜单选项
 
 
 
 ### 设置菜单点击监听 ###
-    mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-		
-		//返回true表示将传入的item显示为选中状态
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);//关闭左侧菜单
-            return true;
-        }
-    });
+
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+	            //返回true,表示选中该选项
+	            @Override
+	            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+	                //关闭侧滑菜单
+	                drawerLayout.closeDrawer(Gravity.START);
+	                return false;
+	            }
+	        });
 
 ## ActionBar ##
 
 ### ActionBar基本使用
-	mActionBar = getSupportActionBar();	// 获取ActionBar
 
-	mActionBar.setTitle("MainTitle");// 设置主title部分
-
-	mActionBar.setDisplayHomeAsUpEnabled(true);// 设置back按钮是否可见
+            ActionBar supportActionBar = getSupportActionBar();
+	        supportActionBar.setDisplayHomeAsUpEnabled(true);
+	        supportActionBar.setTitle(getString(R.string.app_name));
 
 ### ActionBar和DrawerLayout联动
+
+    
     private void initActionBar() {
+        //用Toolbar替换actionbar
+        setSupportActionBar(toolBar);
         ActionBar supportActionBar = getSupportActionBar();
-        //显示返回按钮
         supportActionBar.setDisplayHomeAsUpEnabled(true);
-        //创建ActionBarDrawerToggle
-        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        //同步DrawerLayout的开关状态，如果DrawerLayout是关闭的则显示抽屉图片，如果是打开的则显示返回图片
-        mActionBarDrawerToggle.syncState();
-        //监听DrawerLayout的开关状态, 触发动画
-        mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+        supportActionBar.setTitle(getString(R.string.app_name));
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        //同步状态
+        actionBarDrawerToggle.syncState();//根据DrawerLayout开关的状态来改变它的显示效果
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);//将侧滑滚动的状态通知actionBarDrawerToggle
     }
 
-    /**
-     * 处理ActionBarDrawerToggle的点击事件
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-			//标题栏返回按钮
             case android.R.id.home:
-                mActionBarDrawerToggle.onOptionsItemSelected(item);
+                //封装了drawerLayout的打开和关闭
+                actionBarDrawerToggle.onOptionsItemSelected(item);
+//                drawerLayout.openDrawer(Gravity.START);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 ## ToolBar ##
 官方在某些程度上认为 ActionBar 限制了 android app 的开发与设计的弹性,
@@ -178,66 +178,64 @@ Actionbar一样，一定要固定在Activity的顶部，而是可以放到界面
 ### Toolbar使用 ###
 #### 1. 去掉ActionBar ####
 
-	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
 #### 2. 在布局中添加Toolbar ####
 
+    `
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:actionBarSize"
         android:background="@color/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    </android.support.v7.widget.Toolbar>
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>`
 
 >注意，如果将Toolbar直接放入DrawerLayout，其高度设置会失效（原因回想下View的测量）
 
 #### 3. 替换ActionBar ####
 
+    
     private void initActionBar() {
-		//用Toolbar替换原来的ActionBar
-        setSupportActionBar(mToolbar);
-
+        //用Toolbar替换actionbar
+        setSupportActionBar(toolBar);
         ActionBar supportActionBar = getSupportActionBar();
-        //显示返回按钮
         supportActionBar.setDisplayHomeAsUpEnabled(true);
-        //创建ActionBarDrawerToggle
-        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        //同步DrawerLayout的开关状态
-        mActionBarDrawerToggle.syncState();
-        //监听DrawerLayout的开关状态, 触发动画
-        mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+        supportActionBar.setTitle(getString(R.string.app_name));
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        //同步状态
+        actionBarDrawerToggle.syncState();//根据DrawerLayout开关的状态来改变它的显示效果
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);//将侧滑滚动的状态通知actionBarDrawerToggle
     }
 
 ## 状态栏配置 ##
 #### 1. 给DrawerLayout配置fitsSystemWindows ####
-    android:fitsSystemWindows="true"
+
+        android:fitsSystemWindows="true"
 
 
 #### 2. 创建v21样式 ####
 在v21版本及以上可以配置状态栏颜色，所以
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+        <!-- Base application theme. -->
+	    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+	        <!-- Customize your theme here. -->
+	        <item name="colorPrimary">@color/colorPrimary</item>
+	        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+	        <item name="colorAccent">@color/colorAccent</item>
+	        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+	        <item name="android:statusBarColor">@android:color/transparent</item>
+	    </style>
 
 #### 3. 配置状态栏颜色与Toolbar背景色一致 ####
-    <item name="colorPrimaryDark">@color/colorPrimary</item>
+
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
 
 # 主界面 #
 ## 布局 ##
-	<!--main_content.xml-->
-	<?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout
-	    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    xmlns:app="http://schemas.android.com/apk/res-auto"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
@@ -246,88 +244,132 @@ Actionbar一样，一定要固定在Activity的顶部，而是可以放到界面
 	    <android.support.v7.widget.Toolbar
 	        android:id="@+id/tool_bar"
 	        android:layout_width="match_parent"
-	        android:layout_height="?attr/actionBarSize"
+	        android:layout_height="?android:actionBarSize"
 	        android:background="@color/colorPrimary"
-	        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-	    </android.support.v7.widget.Toolbar>
+	        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
 	
 	    <android.support.design.widget.TabLayout
 	        android:id="@+id/tab_layout"
 	        android:layout_width="match_parent"
-	        android:layout_height="48dip"
-	        app:tabBackground="@color/colorPrimary"
-	        app:tabIndicatorColor="@color/colorAccent"
-	        app:tabIndicatorHeight="3dp"
+	        android:layout_height="wrap_content"
+	        android:background="@color/colorPrimary"
 	        app:tabMode="scrollable"
 	        app:tabSelectedTextColor="@android:color/white"
-	        app:tabTextColor="@android:color/darker_gray"/>
+	        app:tabTextColor="@android:color/darker_gray"></android.support.design.widget.TabLayout>
 	
 	    <android.support.v4.view.ViewPager
-	        android:id="@+id/vp"
+	        android:id="@+id/view_pager"
 	        android:layout_width="match_parent"
-	        android:layout_height="match_parent">
-	    </android.support.v4.view.ViewPager>
-	
+	        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 	</LinearLayout>
 
 ## 初始化布局 ##
-    private void initView() {
-        mVp.setAdapter(new MainPagerAdapter(getResources().getStringArray(R.array.main_titles), getSupportFragmentManager()));
-        mTabLayout.setupWithViewPager(mVp);
-    }
+    
+            titles = getResources().getStringArray(R.array.main_titles);
+	        viewPager.setAdapter(new MainAdapter(getSupportFragmentManager(), titles));
+	        viewPager.addOnPageChangeListener(onPageChangeListener);
+	        //关联viewPager
+	        tabLayout.setupWithViewPager(viewPager);
 
-	public class MainPagerAdapter extends FragmentPagerAdapter {
+	`package ngyb.googleplay.adapter;
 	
-	    private String[] mTitles;
+	import android.support.annotation.Nullable;
+	import android.support.v4.app.Fragment;
+	import android.support.v4.app.FragmentManager;
+	import android.support.v4.app.FragmentPagerAdapter;
 	
-	    public MainPagerAdapter(String[] titles, FragmentManager fragmentManager) {
-	        super(fragmentManager);
-	        mTitles = titles;
+	import ngyb.googleplay.factory.FragmentFactory;
+	
+	
+	/**
+	 * 作者：南宫燚滨
+	 * 描述:
+	 * 邮箱：nangongyibin@gmail.com
+	 * 时间: 2018/5/5 11:13
+	 */
+	public class MainAdapter extends FragmentPagerAdapter {
+	    private final String[] titles;
+	
+	    public MainAdapter(FragmentManager fm, String[] titles) {
+	        super(fm);
+	        this.titles = titles;
 	    }
 	
+	    /**
+	     * @param position
+	     * @return 只会创建一次Fragment
+	     */
 	    @Override
 	    public Fragment getItem(int position) {
-	        return getFragment(position);
+	        return FragmentFactory.getFragment(position);
 	    }
 	
 	    @Override
 	    public int getCount() {
-	        return mTitles.length;
+	        return titles.length;
 	    }
 	
+	    @Nullable
 	    @Override
 	    public CharSequence getPageTitle(int position) {
-	        return mTitles[position];
+	        return titles[position];
+	    }
+	}
+`
+
+    package ngyb.googleplay.factory;
+
+	import android.support.v4.app.Fragment;
+	
+	import ngyb.googleplay.fragment.ApplicationFragment;
+	import ngyb.googleplay.fragment.CategoryFragment;
+	import ngyb.googleplay.fragment.GameFragment;
+	import ngyb.googleplay.fragment.HomeFragment;
+	import ngyb.googleplay.fragment.HotFragment;
+	import ngyb.googleplay.fragment.RecommendFragment;
+	import ngyb.googleplay.fragment.SubjectFragment;
+	
+	
+	/**
+	 * 作者：南宫燚滨
+	 * 描述:
+	 * 邮箱：nangongyibin@gmail.com
+	 * 时间: 2018/5/5 11:15
+	 */
+	public class FragmentFactory {
+	    public static final int FRAGMENT_HOME = 0;
+	    public static final int FRAGMENT_APP = 1;
+	    public static final int FRAGMENT_GAME = 2;
+	    public static final int FRAGMENT_SUBJECT = 3;
+	    public static final int FRAGMENT_RECOMMEND = 4;
+	    public static final int FRAGMENT_CATEGORY = 5;
+	    public static final int FRAGMENT_HOT = 6;
+	
+	    /**
+	     * @param position
+	     * @return 根据不同的位置返回不同的实例
+	     */
+	    public static Fragment getFragment(int position) {
+	        switch (position) {
+	            case FRAGMENT_HOME:
+	                return new HomeFragment();
+	            case FRAGMENT_APP:
+	                return new ApplicationFragment();
+	            case FRAGMENT_GAME:
+	                return new GameFragment();
+	            case FRAGMENT_SUBJECT:
+	                return new SubjectFragment();
+	            case FRAGMENT_RECOMMEND:
+	                return new RecommendFragment();
+	            case FRAGMENT_CATEGORY:
+	                return new CategoryFragment();
+	            case FRAGMENT_HOT:
+	                return new HotFragment();
+	        }
+	        return null;
 	    }
 	}
 
-    private static final int FRAGMENT_HOME = 0;
-    private static final int FRAGMENT_APP = 1;
-    private static final int FRAGMENT_GAME = 2;
-    private static final int FRAGMENT_SUBJECT = 3;
-    private static final int FRAGMENT_RECOMMEND = 4;
-    private static final int FRAGMENT_CATEGORY = 5;
-    private static final int FRAGMENT_HOT = 6;
-
-    public Fragment getFragment(int pos) {
-        switch (pos) {
-            case FRAGMENT_HOME:
-                return new HomeFragment();
-            case FRAGMENT_APP:
-                return new AppFragment();
-            case FRAGMENT_GAME:
-                return new GameFragment();
-            case FRAGMENT_SUBJECT:
-                return new SubjectFragment();
-            case FRAGMENT_CATEGORY:
-                return new CategoryFragment();
-            case FRAGMENT_RECOMMEND:
-                return new RecommendFragment();
-            case FRAGMENT_HOT:
-                return new HotFragment();
-        }
-        return null;
-    }
 
 ## BaseFragment抽取 ##
 BaseFragment抽取了所有Fragment的共性，特性交给子类去实现。
@@ -337,38 +379,59 @@ BaseFragment抽取了所有Fragment的共性，特性交给子类去实现。
 * 加载出错布局
 
 #### 加载成功 ####
-    protected void onDataLoadedSuccess() {
-        mLoadingProgress.setVisibility(View.GONE);
-        mLoadingError.setVisibility(View.GONE);
-        mBaseView.addView(onCreateContentView());
+
+    
+    /**
+     * 抽取加载数据成功后的逻辑
+     */
+    protected void onLoadDataSuccess() {
+        progressBar.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.GONE);
+        //添加页面的真正的布局
+        frameContent.addView(onCreateContentView());
     }
 
 #### 加载失败 ####
-    protected void onDataLoadedError() {
-        mLoadingError.setVisibility(View.VISIBLE);
-        mLoadingProgress.setVisibility(View.GONE);
+
+    
+    /**
+     * 抽取加载数据失败后的逻辑
+     */
+    public void onDataLoadFailed() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+        if (errorLayout != null) {
+            errorLayout.setVisibility(View.VISIBLE);
+        }
     }
 
 ### 界面的不同点 ###
 #### 加载数据 ####
 
-
+    
     /**
-     * 当视图创建完成后加载数据
+     * 当Fragment视图创建完成后的一个回调
+     *
+     * @param view
+     * @param savedInstanceState
      */
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        startLoadData();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        startLoadData();//抽取初始化时加载数据的逻辑
     }
 
     /**
-     * 子类去实现自己的数据加载
+     * 每个页面的加载的数据是不一样的,子类自己实现该方法,完成自己数据的加载
      */
     protected abstract void startLoadData();
 
 #### 创建视图 ####
+
+    
     /**
-     * 子类必须实现该方法提供内容的视图
+     * @return 每个页面的布局都不是一样的, 子类自己实现布局, 返回给基类, 加入FrameLayout里面
      */
     protected abstract View onCreateContentView();
 
@@ -377,106 +440,222 @@ BaseFragment抽取了所有Fragment的共性，特性交给子类去实现。
 * [Wiki](http://square.github.io/retrofit/)
 
 ## 添加依赖 ##
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+        implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    	implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
 ## 创建Api接口 ##
+
+    package ngyb.googleplay.network;
+	
+	import java.util.List;
+	
+	import ngyb.googleplay.bean.AppDetailBean;
+	import ngyb.googleplay.bean.AppItemBean;
+	import ngyb.googleplay.bean.CategoryItemBean;
+	import ngyb.googleplay.bean.HomeBean;
+	import ngyb.googleplay.bean.SubjectItemBean;
+	import retrofit2.Call;
+	import retrofit2.http.GET;
+	import retrofit2.http.Query;
+	
+	/**
+	 * 作者：南宫燚滨
+	 * 描述:
+	 * 邮箱：nangongyibin@gmail.com
+	 * 时间: 2018/5/3 20:57
+	 */
 	public interface Api {
 	    @GET("hot")
 	    Call<List<String>> listHot();
+	
+	    @GET("recommend")
+	    Call<List<String>> listRecommend();
+	
+	    @GET("category")
+	    Call<List<CategoryItemBean>> listCategory();
+	
+	    @GET("subject")
+	    Call<List<SubjectItemBean>> listSubject(@Query("index") int index);
+	
+	    @GET("game")
+	    Call<List<AppItemBean>> listGame(@Query("index") int index);
+	
+	    @GET("app")
+	    Call<List<AppItemBean>> listApp(@Query("index") int index);
+	
+	    @GET("home")
+	    Call<HomeBean> listHome(@Query("index") int index);
+	
+	    @GET("detail")
+	    Call<AppDetailBean> getAppDetail(@Query("packageName") String packageName);
 	}
 
-## 初始化Api接口 ##
-    public static void init(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.HOST)
-                .build();
-        mApi = retrofit.create(Api.class);
-    }
 
-    public static Api getApi() {
-        return mApi;
-    }
+## 初始化Api接口 ##
+
+    package ngyb.googleplay.network;
+
+	import android.content.Context;
+	
+	import com.google.gson.Gson;
+	import com.google.gson.GsonBuilder;
+	
+	import java.io.File;
+	import java.io.IOException;
+	
+	import ngyb.googleplay.constant.Constant;
+	import okhttp3.Cache;
+	import okhttp3.Interceptor;
+	import okhttp3.OkHttpClient;
+	import okhttp3.Response;
+	import retrofit2.Retrofit;
+	import retrofit2.converter.gson.GsonConverterFactory;
+	
+	/**
+	 * 作者：南宫燚滨
+	 * 描述:
+	 * 邮箱：nangongyibin@gmail.com
+	 * 时间: 2018/5/3 22:19
+	 */
+	public class NGYBRetrofit {
+	    private static NGYBRetrofit ngybRetrofit;
+	    private Api api;
+	    public static final int DEFAULT_CACHE_SIZE = 5 * 1024 * 1024;//5m
+	
+	    public static NGYBRetrofit getInstance() {
+	        if (ngybRetrofit == null) {
+	            synchronized (NGYBRetrofit.class) {
+	                if (ngybRetrofit == null) {
+	                    ngybRetrofit = new NGYBRetrofit();
+	                }
+	            }
+	        }
+	        return ngybRetrofit;
+	    }
+	
+	    public void init(Context context) {
+	        Gson gson = new GsonBuilder().setLenient().create();//创建Gson  设置宽大处理,可以接受畸形json字符串
+	        String cacheDir = context.getCacheDir() + "/responses";
+	        File file = new File(cacheDir);
+	        if (!file.exists()) {
+	            file.mkdirs();
+	        }
+	        //创建OkhttpClient配置磁盘缓存目录
+	        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+	                .addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+	//                .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+	                .cache(new Cache(file, DEFAULT_CACHE_SIZE))
+	                .build();
+	        //创建Retrofit对象
+	        Retrofit retrofit = new Retrofit.Builder()
+	                .addConverterFactory(GsonConverterFactory.create(gson))//添加Gson转换器的工厂
+	                .client(okHttpClient).baseUrl(Constant.BASE_URL).build();
+	        //使用retrofit初始化API接口
+	        api = retrofit.create(Api.class);
+	    }
+	
+	    private NGYBRetrofit() {
+	
+	    }
+	
+	    public Api getApi() {
+	        return api;
+	    }
+	
+	    /**
+	     * Dangerous interceptor that rewrites the server's cache-control header.
+	     * 网络拦截器
+	     */
+	    private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
+	        @Override
+	        public Response intercept(Chain chain) throws IOException {
+	            Response originalResponse = chain.proceed(chain.request());
+	            return originalResponse.newBuilder().header("Cache-Control", "max-age=300").build();
+	        }
+	    };
+	}
+
 
 
 ## 配置JSON转换 ##
 由于返回的数据时中括号开头，属于畸形的json字符串，需要配置Gson进行宽大处理。
+            Gson gson = new GsonBuilder().setLenient().create();//创建Gson  设置宽大处理,可以接受畸形json字符串
 
-    private static Gson gson = new GsonBuilder()
-            .setLenient()
-            .create();
-
-    Retrofit retrofit = new Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build();
+            //创建Retrofit对象
+	        Retrofit retrofit = new Retrofit.Builder()
+	                .addConverterFactory(GsonConverterFactory.create(gson))//添加Gson转换器的工厂
+	                .client(okHttpClient).baseUrl(Constant.BASE_URL).build();
 # 热门页面 #
 ## 加载数据 ##
+
+    
     @Override
     protected void startLoadData() {
-        Call<List<String>> listCall = NetworkMananger.getApi().listHot();
+        //获取一个Call
+        Call<List<String>> listCall = NGYBRetrofit.getInstance().getApi().listHot();
         listCall.enqueue(new Callback<List<String>>() {
             @Override
+            //在主线程回调
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                mDataList = response.body();
-                onDataLoadedSuccess();
-
+                dataList = response.body();
+                /*for (int i = 0; i < dataList.size(); i++) {
+                    String s = dataList.get(i);
+                    Log.e(TAG, "onResponse: "+s );
+                }*/
+                onLoadDataSuccess();
             }
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                onDataLoadedError();
+                onDataLoadFailed();
             }
         });
     }
 
 ## 创建视图 ##
 
+    `
     @Override
     protected View onCreateContentView() {
         ScrollView scrollView = new ScrollView(getContext());
-        //流式布局
-        FlowLayout fl = new FlowLayout(getContext());
-        int padding = getResources().getDimensionPixelOffset(R.dimen.padding);
-        fl.setPadding(padding, padding, padding, padding);
-        //给fl添加应有的孩子
-        for (int i = 0; i < mDataList.size(); i++) {
-            final String data = mDataList.get(i);
-            TextView tv = getTextView(padding, data);
-            //创建selector
-            StateListDrawable selectorBg = getStateListDrawable();
-            tv.setBackgroundDrawable(selectorBg);
-            fl.addView(tv);
+        FlowLayout flowLayout = new FlowLayout(getContext());
+        int padding = getResources().getDimensionPixelSize(R.dimen.padding);
+        flowLayout.setPadding(padding, padding, padding, padding);
+        for (int i = 0; i < dataList.size(); i++) {
+            String data = dataList.get(i);
+            TextView textView = getTextView(padding, data);
+            StateListDrawable stateListDrawable = getStateListDrawable();
+            //给TextView设置背景
+            textView.setBackgroundDrawable(stateListDrawable);
+            flowLayout.addView(textView);
         }
-        scrollView.addView(fl);
+        scrollView.addView(flowLayout);
         return scrollView;
-    }
+    }`
 
-    /**
-     * 返回一个选择器
-     */
-    @NonNull
+    
     private StateListDrawable getStateListDrawable() {
-        //创建normal圆角shape
-        GradientDrawable normalBg = new GradientDrawable();
-        //设置圆角
-        normalBg.setCornerRadius(10);
-        //设置颜色
-        int argb = getRandomColor();
-        normalBg.setColor(argb);
-
-        //创建pressed圆角shape
-        GradientDrawable pressedBg = new GradientDrawable();
-        pressedBg.setColor(Color.DKGRAY);
-        pressedBg.setCornerRadius(10);
-
-        //创建selector
-        StateListDrawable selectorBg = new StateListDrawable();
+        //给TextView创建一个带圆角的shape,正常情况下背景
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setCornerRadius(8);
+        //设置一个随机的颜色
+        gradientDrawable.setColor(getRandomColor());
+        //创建一个按下去的背景
+        GradientDrawable pressedDrawable = new GradientDrawable();
+        pressedDrawable.setCornerRadius(8);
+        //设置一个随机的颜色
+        pressedDrawable.setColor(Color.DKGRAY);
+        //创建一个选择器,将两种状态的背景组合起来
+        StateListDrawable stateListDrawable = new StateListDrawable();
         //按下去的状态
-        selectorBg.addState(new int[]{android.R.attr.state_pressed}, pressedBg);
-        //默认状态
-        selectorBg.addState(new int[]{}, normalBg);
-        return selectorBg;
+        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, pressedDrawable);
+        //其他状态
+        stateListDrawable.addState(new int[]{}, gradientDrawable);
+        return stateListDrawable;
     }
+
+    
 
 ## Drawable ##
 
@@ -494,116 +673,124 @@ FlowLayout有一个行的概念，即内部有个Line的类来描述FlowLayout�
 
 
 ## 加载数据 ##
-	public interface Api {
-	
-	    @GET("recommend")
-	    Call<List<String>> listRecommend();
-	}
+
+    
+    @GET("recommend")
+    Call<List<String>> listRecommend();
 
 
+    
     @Override
     protected void startLoadData() {
-        Call<List<String>> listCall = NetworkManager.getApi().listRecommend();
-        listCall.enqueue(new Callback<List<String>>() {
+        call = NGYBRetrofit.getInstance().getApi().listRecommend();
+        call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                mDataList = response.body();
-                onDataLoadedSuccess();
+                dataList = response.body();
+                Toasty.info(getContext(), "" + dataList.get(0), Toast.LENGTH_SHORT).show();
+                //网络回来的饿时候,网络比较慢,界面可能已经销毁
+                if (!call.isCanceled()) {
+                    onLoadDataSuccess();
+                }
             }
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                onDataLoadedError();
+                if (!call.isCanceled()) {
+                    onDataLoadFailed();
+                }
             }
         });
     }
 
 ## 创建视图 ##
-
-
+    
     @Override
     protected View onCreateContentView() {
-        //创建星状图
         StellarMap stellarMap = new StellarMap(getContext());
-        //设置adapter
-        stellarMap.setAdapter(new RecommendAdapter(getContext(), mData));
         int padding = getResources().getDimensionPixelSize(R.dimen.padding);
-        //设置星状图内部padding
         stellarMap.setInnerPadding(padding, padding, padding, padding);
-        //设置布局网格15*20，越大分布越平均
-        stellarMap.setRegularity(15, 20);
-        //设置初始化组
-        stellarMap.setGroup(0);
+        stellarMap.setAdapter(new RecommendAdapter(getContext(), dataList));
+        stellarMap.setRegularity(15, 20);//设置网络,// 避免重叠情况
+        stellarMap.setGroup(0);//初始化显示第0组
         return stellarMap;
     }
 
 ## 创建StellarMap.Adapter ##
+
+    
     /**
-     * 返回组(页面)的个数
+     * @return 获取组的个数
      */
     @Override
     public int getGroupCount() {
-        int pageCount = mDataList.size() / PAGE_SIZE;
-        if (mDataList.size() % PAGE_SIZE != 0) {//有余数的时候
-            pageCount++;
+        int count = list.size() / DEFAULT_PAGE_SIZE;
+        if (list.size() % DEFAULT_PAGE_SIZE != 0) {
+            //有余数,增加一个页面
+            count++;
         }
-        return pageCount;
+        return count;
     }
 
     /**
-     * 返回对应组(页面)条目的个数
+     * @param i 组的下标
+     * @return 获取一个组对应的元素的个数
      */
     @Override
-    public int getCount(int group) {
-        if (mDataList.size() % PAGE_SIZE != 0) {//有余数
-            if (group == getGroupCount() - 1) {//最后一组
-                return mDataList.size() % PAGE_SIZE;
+    public int getCount(int i) {
+        if (list.size() % DEFAULT_PAGE_SIZE != 0) {
+            //有余数,最后一个页面的元素的个数就是余数的大小
+            if (i == getGroupCount() - 1) {
+                return list.size() % DEFAULT_PAGE_SIZE;
             }
         }
-        return PAGE_SIZE;
+        return DEFAULT_PAGE_SIZE;
     }
 
     /**
-     * 返回对应组中对应位置的view
-     *
-     * @param convertView 回收的view
+     * @param i    组的下标
+     * @param i1   在某个组里面某个位置
+     * @param view 回收的view
+     * @return 返回对应组对应位置的条目
      */
     @Override
-    public View getView(int group, int position, View convertView) {
-        TextView tv;
-        if (convertView == null) {
-            tv = new TextView(mContext);
-        } else {
-            tv = (TextView) convertView;
+    public View getView(int i, int i1, View view) {
+        if (view == null) {
+            view = new TextView(context);
         }
-        int index = group * PAGE_SIZE + position;
-        String data = mDataList.get(index);
-        tv.setText(data);
-        //随机大小
-        Random random = new Random();
-        tv.setTextSize(random.nextInt(4) + 14);//14-18
-        //随机颜色
-		int argb = getRandomColor(random);
-        tv.setTextColor(argb);
-        return tv;
+        TextView textview = (TextView) view;
+        //获取对应位置的数据
+        int i2 = i * DEFAULT_PAGE_SIZE + i1;
+        String data = list.get(i2);
+        textview.setText(data);
+        int textSize = 14 + random.nextInt(6);//14--20
+        textview.setTextSize(textSize);
+        textview.setTextColor(getRandomColor());
+        return view;
+    }
+
+    private int getRandomColor() {
+        int alpha = 255;
+        int red = 30 + random.nextInt(170);//30-200
+        int green = 30 + random.nextInt(170);
+        int blue = 30 + random.nextInt(170);
+        int argb = Color.argb(alpha, red, green, blue);
+        return argb;
     }
 
     /**
-     * 返回放大或者缩小下一组的下标
-     *
-     * @param group 当前组的下标
-     * @param isZoomIn true表示放大，false表示缩小
+     * @param i 组的下标
+     * @param b 放大
+     * @return 返回下一组放大动画的下标
      */
     @Override
-    public int getNextGroupOnZoom(int group, boolean isZoomIn) {
-        if (isZoomIn) {
-            return (group + 1) % getGroupCount();
+    public int getNextGroupOnZoom(int i, boolean b) {
+        if (b) {
+            return (i + 1) % getGroupCount();
         } else {
-            return (group - 1 + getGroupCount()) % getGroupCount();
+            return (i - 1 + getGroupCount()) % getGroupCount();
         }
     }
-
-
 
 ## StellarMap原理 ##
 StellarMap内部维护两个RandomLayout, 一个显示，一个隐藏。RandomLayout随机分散摆放里面的子控件。StellarMap同时监听用户手势来动画切换两个RandomLayout。
@@ -619,115 +806,158 @@ StellarMap内部维护两个RandomLayout, 一个显示，一个隐藏。RandomLa
 由于首页，应用，游戏，专题，分类都是List的形式，所以可以抽取一个ListView。
 
 ### 点击监听 ###
-    mListView.setOnItemClickListener(mOnItemClickListener);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 ### ListView的头 ###
-    if (header != null) {
-        mListView.addHeaderView(header);
-    }
+
+            if (view != null) {
+	            listView.addHeaderView(view);
+	        }
 
 ## 特性 ##
 ### 不同的adpater ###
+
+    
+    /**
+     * @return 子类实现该方法返回一个adapter
+     */
     protected abstract BaseAdapter onCreateAdapter();
 
 ### 对条目点击事件的处理 ###
-    protected void onListItemClick(int i) {};
+
+    
+    /**
+     * @param position 子类覆盖该方法,完成自己点击事件的处理
+     */
+    protected void onListItemClick(int position) {
+
+    }
 
 
 # BaseListAdapter的抽取 #
 ## 共性 ##
 ### 上下文Context和数据集合 ###
+
+    
     public BaseListAdapter(Context context, List<T> dataList) {
-        mDataList = dataList;
-        mContext = context;
+        this.context = context;
+        this.dataList = dataList;
     }
 
 ### getCount ###
+
+    
     @Override
     public int getCount() {
-        if (mDataList == null) {
+        if (dataList == null) {
             return 0;
         }
-        return mDataList.size();
+        return dataList.size();
+
     }
+
 ### getItem ###
+
+    
+    /**
+     * @param position
+     * @return 返回对应位置的数据
+     */
     @Override
     public Object getItem(int position) {
-        return mDataList.get(position);
+        return dataList.get(position);
     }
 
 ### getItemId ###
+
+    
     @Override
     public long getItemId(int position) {
         return position;
     }
 
 ### getView ###
+
+    
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
+        ViewHolder vh = null;
         if (convertView == null) {
-            convertView = onCreateItemView(position);//创建条目布局
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
+            convertView = onCreateItemView(position);
+            vh = new ViewHolder(convertView);
+            convertView.setTag(vh);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            vh = (ViewHolder) convertView.getTag();
         }
-        onBindItemView(viewHolder.holdView, position);//绑定对应位置的条目
+        onBindItemView(vh.itemView, position);
         return convertView;
     }
 
 
 ### ViewHolder ###
-    public class ViewHolder {
-        View holdView;
-        public ViewHolder(View v) {
-            holdView = v;
+
+    
+    public static class ViewHolder {
+        private View itemView;
+
+        public ViewHolder(View item) {
+            itemView = item;
         }
     }
 
 
 ## 特性 ##
 ### 条目视图的创建 ###
+
+    
     /**
-     * 子类必须实现该方法来创建对应位置的View
+     * @param position
+     * @return 子类必须实现该方法来完成条目的创建
      */
-    protected abstract View onCreateItemView(int position);
+    abstract View onCreateItemView(int position);
 
 ### 条目视图的绑定
+
+    
     /**
-     *
-     * @param view 将要绑定的View
-     * @param position Item的位置，通过位置可以获取到对应的数据来刷新视图
+     * @param itemView
+     * @param position 子类必须实现该方法来完成条目的绑定
      */
-    protected abstract void onBindItemView(View view, int position);
+    abstract void onBindItemView(View itemView, int position);
 
 
 # 分类界面 #
 
 为了便于页面的扩展，分类界面显示采用ListView, 所以继承BaseListFragment。
 ## 加载数据 ##
+
+    
     @Override
     protected void startLoadData() {
-        Call<List<CategoryBean>> categories = NetworkManager.getApi().categories();
-        categories.enqueue(new Callback<List<CategoryBean>>() {
+        Call<List<CategoryItemBean>> listCall = NGYBRetrofit.getInstance().getApi().listCategory();
+        listCall.enqueue(new Callback<List<CategoryItemBean>>() {
             @Override
-            public void onResponse(Call<List<CategoryBean>> call, Response<List<CategoryBean>> response) {
-                mCategories = response.body();
-                onDataLoadedSuccess();
+            public void onResponse(Call<List<CategoryItemBean>> call, Response<List<CategoryItemBean>> response) {
+                dataList = response.body();
+                Toasty.info(getContext(), "" + dataList.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+                onLoadDataSuccess();
             }
 
             @Override
-            public void onFailure(Call<List<CategoryBean>> call, Throwable t) {
-                onDataLoadedError();
+            public void onFailure(Call<List<CategoryItemBean>> call, Throwable t) {
+                onDataLoadFailed();
             }
         });
     }
 
 ## 创建Adapter ##
+
+    
     @Override
     protected BaseAdapter onCreateAdapter() {
-        return new CategoryListAdapter(getContext(), mCategories);
+        //数据集合肯定有值,数据加载成功后才创建布局
+        return new CategoryAdapter(getContext(), dataList);
     }
 
 
@@ -736,25 +966,42 @@ StellarMap内部维护两个RandomLayout, 一个显示，一个隐藏。RandomLa
 
 
 
-    public void bindView(CategoryBean item) {
-        mTitle.setText(item.getTitle());
-        mTableLayout.removeAllViews();
-        int widthPixels = getResources().getDisplayMetrics().widthPixels - mTableLayout.getPaddingLeft() - mTableLayout.getPaddingRight() ;
-        int itemWidth = widthPixels / 3;
+    
+    public void bindView(CategoryItemBean categoryItemBean) {
+        title.setText(categoryItemBean.getTitle());
+        //因为CategoryInfoItemView要加入到TableRow里面,所以它的布局参数是TableRow来定义的
         TableRow.LayoutParams layoutParams = new TableRow.LayoutParams();
-        layoutParams.width = itemWidth;//每个子条目的宽度
-        List<CategoryBean.InfosBean> infos = item.getInfos();
-        for (int i = 0; i < infos.size(); i++) {
-            CategoryBean.InfosBean infosBean = infos.get(i);
+        //获取屏幕宽度
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        //TableLayout的1/3
+        layoutParams.width = (displayMetrics.widthPixels - tableLayout.getPaddingLeft() - tableLayout.getPaddingRight()) / 3;
+        layoutParams.height = TableRow.LayoutParams.WRAP_CONTENT;
+        //清除TableLayout里面所有的行
+        tableLayout.removeAllViews();
+        //刷新TableLayout里面所有的行
+        for (int i = 0; i < categoryItemBean.getInfos().size(); i++) {
             TableRow tableRow = new TableRow(getContext());
-            //添加一行中的第一个item
-            addFirstChildItem(tableRow, layoutParams, infosBean);
-            //添加一行中的第二个item
-            addSecondChildItem(tableRow, layoutParams, infosBean);
-            //添加一行中的第三个item
-           addThirdChildItem(tableRow, layoutParams, infosBean);
-            //添加一行
-            mTableLayout.addView(tableRow);
+            //获取一行的数据
+            CategoryItemBean.InfosBean infosBean = categoryItemBean.getInfos().get(i);
+            CategoryInfoItemView categoryInfoItemView = new CategoryInfoItemView(getContext());
+            //将CategoryInfoItemView宽度设置为TableLayout宽度的1/3
+            categoryInfoItemView.setLayoutParams(layoutParams);
+            categoryInfoItemView.bindView(infosBean.getName1(), infosBean.getUrl1());
+            tableRow.addView(categoryInfoItemView);
+            if (infosBean.getName2().length() > 0) {
+                CategoryInfoItemView categoryInfoItemView1 = new CategoryInfoItemView(getContext());
+                categoryInfoItemView1.bindView(infosBean.getName2(), infosBean.getUrl2());
+                categoryInfoItemView1.setLayoutParams(layoutParams);
+                tableRow.addView(categoryInfoItemView1);
+            }
+            if (infosBean.getName3().length() > 0) {
+                CategoryInfoItemView categoryInfoItemView1 = new CategoryInfoItemView(getContext());
+                categoryInfoItemView1.bindView(infosBean.getName3(), infosBean.getUrl3());
+                categoryInfoItemView1.setLayoutParams(layoutParams);
+                tableRow.addView(categoryInfoItemView1);
+            }
+            //往TableLayout加入一行
+            tableLayout.addView(tableRow);
         }
     }
 
@@ -765,25 +1012,29 @@ CategoryInfoItemView为CategoryItemView中一个子条目的视图。
 
 
 ### 加载图片 ###
-	//图片url
-    public static final String URL_IMAGE = HOST + "image?name=";
-	//添加Glide依赖
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+        public static final String IMAGE_URL = "http://47.105.71.243:8080/GooglePlayServer/image?name=";
+
+            Glide.with(getContext()).load(Constant.IMAGE_URL + url).into(categoryInfoImage);
 
 
 # BaseLoadMoreListFragment的抽取 #
 ## 共性 ##
 首页，应用，游戏，专题都能够滚动到底部加载更多，都显示一个加载进度条。
 
+    
     @Override
     protected void initListView() {
         super.initListView();
+        //ListView初始化
         getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (scrollState == SCROLL_STATE_IDLE) {
-                    if (view.getLastVisiblePosition() == getLoadMorePosition()) {
-                        onStartLoadMore();
+                    //滚动停止时,判断是否滚动到底部
+                    if (shouldStartLoadMore()) {
+                        //加载更多数据
+                        loadMoreData();
                     }
                 }
             }
@@ -798,7 +1049,7 @@ CategoryInfoItemView为CategoryItemView中一个子条目的视图。
 ## 特性 ##
 加载更多数据的实现
 
-    protected abstract void onStartLoadMore();
+        protected abstract void loadMoreData();
 
 # BaseLoadMoreListAdapter的抽取 #
 由于列表的item的视图都是由Adapter来决定的，且首页，应用，游戏，专题都有一个加载进度条，所以可以抽取一个Adapter来封装加载进度条的创建
@@ -806,61 +1057,57 @@ CategoryInfoItemView为CategoryItemView中一个子条目的视图。
 
 ## 共性 ##
 ### getCount ###
-    /**
-     *  返回条目个数，由于多了一个进度条的条目，所以多加一个1。
-     */
+
+    
     @Override
     public int getCount() {
         if (getDataList() == null) {
             return 0;
-        } else {
-            return getDataList().size() + 1;
         }
+        return getDataList().size() + 1; //多了一进度条的条目
     }
 
 ### getViewTypeCount ###
-    /**
-     *  返回条目的类型个数，这里有两种类型的条目，一种是正常的item, 一种是进度条条目
-     */
+
+    
     @Override
     public int getViewTypeCount() {
         return 2;
     }
 
 ### getItemViewType ###
-    /**
-     * 返回对应position位置的item的类型，最后一个位置为进度条类型，其他为正常item类型
-     */
+
+    
     @Override
     public int getItemViewType(int position) {
         if (position == getCount() - 1) {
-            return ITEM_TYPE_LOAD_MORE;
+            return ITEM_TYPE_ZERO;
         } else {
-            return ITEM_TYPE_NORMAL;
+            return ITEM_TYPE_ONE;
         }
     }
 
 ### onCreateItemView###
-    /**
-     * 由于加载更多进度条每个页面是一样的，所以统一在这里创建
-     */
+
+    
     @Override
-    protected View onCreateItemView(int position) {
-        if (getItemViewType(position) == ITEM_TYPE_LOAD_MORE) {
-            return new LoadingMoreProgressView(getContext());
+    View onCreateItemView(int position) {
+        if (getItemViewType(position) == ITEM_TYPE_ONE) {
+            //创建普通类的条目
+            return onCreateOneItemView();
         } else {
-            //子类实现普通类型item的创建
-            return onCreateNormalView();
+            //创建一个进度条
+            return new LoadingView(getContext());
         }
     }
+
 ### onBindItemView ###
-    /**
-     * 只需要绑定普通类型的item, 进度条不需要数据进行绑定
-     */
+
+    
     @Override
-    protected void onBindItemView(View view, int position) {
-        if (ITEM_TYPE_NORMAL == getItemViewType(position)) {
-            onBindNormalView(view, position);//子类来实现普通类型的item的绑定
+    void onBindItemView(View itemView, int position) {
+        if (getItemViewType(position) == ITEM_TYPE_ONE) {
+            onBindNormalItemView(itemView, position);
         }
     }
 
@@ -870,99 +1117,117 @@ CategoryInfoItemView为CategoryItemView中一个子条目的视图。
 
 ## 特性 ##
 ### onCreateNormalView ###
+
+    
+    
     /**
-     *  创建普通的item的View
+     * @return 子类必须实现方法实现一个普通的条目
      */
-    protected abstract View onCreateNormalView();
+    abstract View onCreateOneItemView();
 
 
 ### onBindNormalView
-    /**
-     * 绑定普通的ViewHolder
-     */
-    protected abstract void onBindNormalView(View view, int position);
+
+    
+    abstract void onBindNormalItemView(View itemView, int position);
 
 
 
 # 专题界面 #
 
 ## 创建Api接口 ##
+
+    
     @GET("subject")
-    Call<List<SubjectBean>> listSubject(@Query("index") int index);
+    Call<List<SubjectItemBean>> listSubject(@Query("index") int index);
 
 > 注意：index为分页查询的参数，默认20条为一页，可以传入0,20,40,60, 60之后就没有更多数据。
 
 ## 加载数据 ##
+
+    
     @Override
     protected void startLoadData() {
-        Call<List<SubjectBean>> listCall = NetworkManager.getApi().listSubject(0);
-        listCall.enqueue(new Callback<List<SubjectBean>>() {
+        Call<List<SubjectItemBean>> listCall = NGYBRetrofit.getInstance().getApi().listSubject(0);
+        listCall.enqueue(new Callback<List<SubjectItemBean>>() {
             @Override
-            public void onResponse(Call<List<SubjectBean>> call, Response<List<SubjectBean>> response) {
-                mSubjects = response.body();
-                onDataLoadedSuccess();
+            public void onResponse(Call<List<SubjectItemBean>> call, Response<List<SubjectItemBean>> response) {
+                dataList = response.body();
+                Toasty.info(getContext(), "" + dataList.get(0).getDes(), Toast.LENGTH_SHORT).show();
+                onLoadDataSuccess();
             }
 
             @Override
-            public void onFailure(Call<List<SubjectBean>> call, Throwable t) {
-                onDataLoadedError();
+            public void onFailure(Call<List<SubjectItemBean>> call, Throwable t) {
+                onDataLoadFailed();
             }
         });
     }
 
 ## 创建Adapter ##
+
+    
     @Override
     protected BaseAdapter onCreateAdapter() {
-        return new SubjectListAdapter(getContext(), mSubjects);
+        return new SubjectAdapter(getContext(), dataList);
     }
 
 
 ## 加载更多数据 ##
+    
+    
     @Override
-    protected void onStartLoadMore() {
-        Call<List<SubjectBean>> listCall = NetworkManager.getApi().listSubject(mSubjects.size());
-        listCall.enqueue(new Callback<List<SubjectBean>>() {
+    protected void loadMoreData() {
+        Call<List<SubjectItemBean>> listCall = NGYBRetrofit.getInstance().getApi().listSubject(dataList.size());
+        listCall.enqueue(new Callback<List<SubjectItemBean>>() {
             @Override
-            public void onResponse(Call<List<SubjectBean>> call, Response<List<SubjectBean>> response) {
-                mSubjects.addAll(response.body());
-                getAdapter().notifyDataSetChanged();
+            public void onResponse(Call<List<SubjectItemBean>> call, Response<List<SubjectItemBean>> response) {
+                //将更多的数据加入当前的数据集合中
+                dataList.addAll(response.body());
+                getListAdapter().notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<List<SubjectBean>> call, Throwable t) {
+            public void onFailure(Call<List<SubjectItemBean>> call, Throwable t) {
+
             }
         });
     }
-
-
 
 # BaseAppListFragment的抽取 #
 除了首页多了一个轮播图外，首页，应用，游戏界面具有相同的app的列表，所以抽取一个BaseAppListFragment。
 ## 共性 ##
 ### 数据列表 ###
-    List<AppListItemBean> mAppListItems = new ArrayList<AppListItemBean>();
+
+        protected List<AppItemBean> dataList = new ArrayList<>();
 
 > 注意 AppListItemBean中的starts字段要是float类型，不能是int类型，否则json解析会出错, Retrofit会回调onFailure方法。
 
 ### 相同的Adapter ###
+
+    
     @Override
     protected BaseAdapter onCreateAdapter() {
-       return new AppListAdapter(getContext(), mAppListItems);
+        return new AppListAdapter(getContext(), dataList);
     }
 
 
 # AppListAdapter的抽取 #
 
 ## onCreateNormalView ##
+
+    
     @Override
-    protected View onCreateNormalView() {
-        return new AppListItemView(getContext());
+    View onCreateOneItemView() {
+        return new AppItemView(getContext());
     }
 
 ## onBindNormalView ##
+
+    
     @Override
-    protected void onBindNormalView(View view, int position) {
-        ((AppListItemView)view).bindView(getDataList().get(position));
+    void onBindNormalItemView(View itemView, int position) {
+        ((AppItemView) itemView).bindView(getDataList().get(position));
     }
 
 ## AppListItemView ##
@@ -973,13 +1238,18 @@ CategoryInfoItemView为CategoryItemView中一个子条目的视图。
 
 
 ### AppListItemView的绑定 ###
-    public void bindView(AppListItemBean item) {
-        mAppName.setText(item.getName());
-        mAppDes.setText(item.getDes());
-        mAppSize.setText(Formatter.formatFileSize(getContext(), item.getSize()));
-        mAppRating.setRating(item.getStars());
-        Glide.with(getContext()).load(Constant.BASE_IMAGE_URL + item.getIconUrl()).placeholder(R.drawable.ic_default).into(mAppIcon);
-		......
+
+    
+    /**
+     * @param appItemBean 当listview滚动,绑定条目
+     */
+    public void bindView(AppItemBean appItemBean) {
+        Glide.with(getContext()).load(Constant.IMAGE_URL + appItemBean.getIconUrl()).into(appIcon);
+        appName.setText(appItemBean.getName());
+        ratingBar.setRating(appItemBean.getStars());
+        size.setText(Formatter.formatFileSize(getContext(), appItemBean.getSize()));
+        appDesc.setTag(appItemBean.getDes());
+        circleDownloadView.syncState(appItemBean);
     }
 
 >注意，创建AppListItemBean时，starts字段需为float类型
@@ -988,129 +1258,161 @@ CategoryInfoItemView为CategoryItemView中一个子条目的视图。
 # 游戏页面 #
 
 ## 创建接口 ##
+
+    
     @GET("game")
-    Call<List<AppListItemBean>> listGames(@Query("index") int index);
+    Call<List<AppItemBean>> listGame(@Query("index") int index);
 
 ## 加载数据 ##
+
+    
     @Override
     protected void startLoadData() {
-
-        Call<List<AppListItem>> listCall = NetworkManager.getApi().listGames(0);
-        listCall.enqueue(new Callback<List<AppListItem>>() {
+        Call<List<AppItemBean>> listCall = NGYBRetrofit.getInstance().getApi().listGame(0);
+        listCall.enqueue(new Callback<List<AppItemBean>>() {
             @Override
-            public void onResponse(Call<List<AppListItem>> call, Response<List<AppListItem>> response) {
-                getAppList().addAll(response.body());
-                onDataLoadedSuccess();
+            public void onResponse(Call<List<AppItemBean>> call, Response<List<AppItemBean>> response) {
+                if (response != null && response.body() != null && response.body().size() > 0) {
+
+                    dataList.addAll(response.body());
+                    onLoadDataSuccess();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<AppListItem>> call, Throwable t) {
-                onDataLoadedError();
+            public void onFailure(Call<List<AppItemBean>> call, Throwable t) {
+                onDataLoadFailed();
             }
         });
     }
 
 ## 加载更多数据 ##
-    @Override
-    protected void onStartLoadMore() {
-        Call<List<AppListItem>> listCall = NetworkManager.getApi().listGames(mAppListItems.size());
-        listCall.enqueue(new Callback<List<AppListItem>>() {
-            @Override
-            public void onResponse(Call<List<AppListItem>> call, Response<List<AppListItem>> response) {
-                getAppList().addAll(response.body());
-                getAdapter().notifyDataSetChanged();
-            }
 
-            @Override
-            public void onFailure(Call<List<AppListItem>> call, Throwable t) {
-
-            }
-        });
-    }
+        @Override
+	    protected void loadMoreData() {
+	        Call<List<AppItemBean>> listCall = NGYBRetrofit.getInstance().getApi().listGame(dataList.size());
+	        listCall.enqueue(new Callback<List<AppItemBean>>() {
+	            @Override
+	            public void onResponse(Call<List<AppItemBean>> call, Response<List<AppItemBean>> response) {
+	                dataList.addAll(response.body());
+	                getListAdapter().notifyDataSetChanged();
+	            }
+	
+	            @Override
+	            public void onFailure(Call<List<AppItemBean>> call, Throwable t) {
+	
+	            }
+	        });
+	    }
 
 
 # 应用页面 #
 
 
 ## 创建接口 ##
+
+    
     @GET("app")
-    Call<List<AppListItemBean>> listApps(@Query("index") int index);
+    Call<List<AppItemBean>> listApp(@Query("index") int index);
 
 ## 加载数据 ##
+
+    
     @Override
     protected void startLoadData() {
-        Call<List<AppListItem>> listCall = NetworkManager.getApi().listApps(0);
-        listCall.enqueue(new Callback<List<AppListItem>>() {
+        Call<List<AppItemBean>> listCall = NGYBRetrofit.getInstance().getApi().listApp(0);
+        listCall.enqueue(new Callback<List<AppItemBean>>() {
             @Override
-            public void onResponse(Call<List<AppListItem>> call, Response<List<AppListItem>> response) {
-                getAppList().addAll(response.body());
-                onDataLoadedSuccess();
+            public void onResponse(Call<List<AppItemBean>> call, Response<List<AppItemBean>> response) {
+                if (response != null) {
+                    if (response.body() != null && response.body().size() > 0) {
+
+                        dataList.addAll(response.body());
+                        onLoadDataSuccess();
+                    }
+                }
             }
 
             @Override
-            public void onFailure(Call<List<AppListItem>> call, Throwable t) {
-                onDataLoadedError();
+            public void onFailure(Call<List<AppItemBean>> call, Throwable t) {
+                onDataLoadFailed();
             }
         });
     }
 
 ## 加载更多数据 ##
-    @Override
-    protected void onStartLoadMore() {
-        Call<List<AppListItem>> listCall = NetworkManager.getApi().listApps(getAppList().size());
-        listCall.enqueue(new Callback<List<AppListItem>>() {
-            @Override
-            public void onResponse(Call<List<AppListItem>> call, Response<List<AppListItem>> response) {
-                getAppList().addAll(response.body());
-                getAdapter().notifyDataSetChanged();
-            }
 
-            @Override
-            public void onFailure(Call<List<AppListItem>> call, Throwable t) {
-
-            }
-        });
-    }
+        @Override
+	    protected void loadMoreData() {
+	        Call<List<AppItemBean>> listCall = NGYBRetrofit.getInstance().getApi().listApp(dataList.size());
+	        listCall.enqueue(new Callback<List<AppItemBean>>() {
+	            @Override
+	            public void onResponse(Call<List<AppItemBean>> call, Response<List<AppItemBean>> response) {
+	                dataList.addAll(response.body());
+	                getListAdapter().notifyDataSetChanged();
+	            }
+	
+	            @Override
+	            public void onFailure(Call<List<AppItemBean>> call, Throwable t) {
+	            }
+	        });
+	    }
 
 # 首页页面 #
 
 
 ## 创建接口 ##
+
+    
     @GET("home")
     Call<HomeBean> listHome(@Query("index") int index);
 
 ## 加载数据 ##
+
+    
     @Override
     protected void startLoadData() {
-        Call<HomeBean> listCall = NetworkManager.getApi().listHome(0);
-        listCall.enqueue(new Callback<HomeBean>() {
+        Call<HomeBean> homeBeanCall = NGYBRetrofit.getInstance().getApi().listHome(0);
+        homeBeanCall.enqueue(new Callback<HomeBean>() {
             @Override
             public void onResponse(Call<HomeBean> call, Response<HomeBean> response) {
-                getAppList().addAll(response.body().getList());
-                mLooperDataList.addAll(response.body().getPicture());
-                onDataLoadedSuccess();
+                Toasty.success(getContext(), "success", Toast.LENGTH_SHORT).show();
+                if (response != null) {
+                    if (response.body() != null) {
+                        if (response.body().getList() != null && response.body().getList().size() > 0) {
+                            dataList.addAll(response.body().getList());
+                            pictures = response.body().getPicture();
+                            onLoadDataSuccess();
+                        }
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<HomeBean> call, Throwable t) {
-                onDataLoadedError();
+                Toasty.error(getContext(), "failed" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                onDataLoadFailed();
             }
         });
+
     }
 
 ## 加载更多数据 ##
+
+    
     @Override
-    protected void onStartLoadMore() {
-        Call<HomeBean> listCall = NetworkManager.getApi().listHome(getAppList().size());
-        listCall.enqueue(new Callback<HomeBean>() {
+    protected void loadMoreData() {
+        Call<HomeBean> homeBeanCall = NGYBRetrofit.getInstance().getApi().listHome(dataList.size());
+        homeBeanCall.enqueue(new Callback<HomeBean>() {
             @Override
             public void onResponse(Call<HomeBean> call, Response<HomeBean> response) {
-                getAppList().addAll(response.body().getList());
-                getAdapter().notifyDataSetChanged();
+                dataList.addAll(response.body().getList());
+                getListAdapter().notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<HomeBean> call, Throwable t) {
+
             }
         });
     }
@@ -1118,91 +1420,123 @@ CategoryInfoItemView为CategoryItemView中一个子条目的视图。
 ## 添加轮播图 ##
 
 ### 集成FunBanner ###
-	//项目build.gradle
+
+    
 	allprojects {
 	    repositories {
-	        maven { url 'https://jitpack.io' }
+	        google()
+	        jcenter()
+	        maven { url 'https://www.jitpack.io' }
 	    }
 	}
-	//app模块build.gradle
-    compile 'com.github.uncleleonfan:funbanner:1.1.5'
+
+    implementation 'com.github.uncleleonfan:funbanner:1.2.0'
 
 ### 初始化FunBanner ###
 
+    
     @Override
     protected View onCreateHeaderView() {
-        return new FunBanner.Builder(getContext())
+        FunBanner funBanner = new FunBanner.Builder(getContext())
                 .setHeightWidthRatio(0.377f)
-                .setEnableAutoLoop(true)
-                .setImageUrlHost(Constant.BASE_IMAGE_URL)
-                .setImageUrls(mLooperDataList)
+                .setDotNormalColor(Color.WHITE)
+                .setImageUrlHost(Constant.IMAGE_URL)
+                .setImageUrls(pictures)
+                .setDotSelectedColor(getResources().getColor(R.color.colorPrimary))
                 .build();
-
+        return funBanner;
     }
 
 ### 调整加载更多时的位置 ###
 
-    /**
-     *  获取触发加载更多时的位置， 由于ListView的getLastVisiblePosition会将头计算在内，所以这里也需要加上头的个数
-     */
-    protected int getLoadMorePosition() {
-        return getAdapter().getCount() - 1 + getListView().getHeaderViewsCount();
+    
+    protected void initListView() {
+        //listview的初始化
+        listView.setDivider(null);//去掉分割线
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //position会将头计算在内
+                position = position - getListView().getHeaderViewsCount();//去掉头的计算
+                onListItemClick(position);
+            }
+        });
     }
+
 ### 调整item点击的位置 ###
 
-	/**
-	 * item点击事件传过来的位置会将ListView的头计算在内，所以减掉头的个数
-	 */	
-    private AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            int position = i - getListView().getHeaderViewsCount();
-            onListItemClick(position);
-        }
-    };
+    
+    protected void initListView() {
+        //listview的初始化
+        listView.setDivider(null);//去掉分割线
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //position会将头计算在内
+                position = position - getListView().getHeaderViewsCount();//去掉头的计算
+                onListItemClick(position);
+            }
+        });
+    }
 
 
 # 应用详情页面 #
 
 ## AppDetailActivity ##
 ### 初始化ActionBar ###
-    private void initActionBar() {
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("应用详情");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    }
+
+    
+	    @Override
+	    protected void init() {
+	        super.init();
+	        setSupportActionBar(toolBar);
+	        ActionBar supportActionBar = getSupportActionBar();
+	        supportActionBar.setTitle("应用详情");
+	        supportActionBar.setDisplayHomeAsUpEnabled(true);
+	        setStatusBarColor();
+	//        packageName = getIntent().getStringExtra("package_name");
+	//        Toast.makeText(this, ""+packageName, Toast.LENGTH_SHORT).show();
+	    }
 
 ### 配置状态条颜色 ###
-	/**
-	 * 由于状态栏的颜色在主题中配置成透明了，所以需要写代码将状态栏的颜色动态的改成想要的颜色
-	 */
+
+    
+    /**
+     * 由于状态栏的颜色在主题中配置成透明了,所以需要些代码将状态栏的颜色改成想要的颜色
+     */
     private void setStatusBarColor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-        }
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
 #### MainActivity中状态栏背景颜色怎么实现的？ ####
 MainActivity中的状态栏颜色也是透明的，但为什么我在style中配置下colorPrimaryDark，也能改变状态栏底部的颜色？这是怎么做到的呢？这其实是DrawLayout自己画出来的！！！ DrawLayout会获取colorPrimaryDark的属性值来绘制一个背景。
 
-    @Override
+    
     public void onDraw(Canvas c) {
         super.onDraw(c);
-        if (mDrawStatusBarBackground && mStatusBarBackground != null) {
-            final int inset = IMPL.getTopInset(mLastInsets);
+        if (this.mDrawStatusBarBackground && this.mStatusBarBackground != null) {
+            int inset;
+            if (VERSION.SDK_INT >= 21) {
+                inset = this.mLastInsets != null ? ((WindowInsets)this.mLastInsets).getSystemWindowInsetTop() : 0;
+            } else {
+                inset = 0;
+            }
+
             if (inset > 0) {
-                mStatusBarBackground.setBounds(0, 0, getWidth(), inset);
-                mStatusBarBackground.draw(c);
+                this.mStatusBarBackground.setBounds(0, 0, this.getWidth(), inset);
+                this.mStatusBarBackground.draw(c);
             }
         }
+
     }
 
 
 
 ### 返回按钮 ###
+
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -1210,55 +1544,61 @@ MainActivity中的状态栏颜色也是透明的，但为什么我在style中配
                 finish();
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
 ## AppDetailFragment ##
 ### 加载数据 ###
+
+    
     @Override
     protected void startLoadData() {
-        mPackageName = getActivity().getIntent().getStringExtra("package_name");
-        Call<AppDetailBean> appDetailBeanCall = NetworkManager.getApi().appDetail(mPackageName);
-        appDetailBeanCall.enqueue(new Callback<AppDetailBean>() {
+        String packageName = getActivity().getIntent().getStringExtra("package_name");
+        Call<AppDetailBean> appDetail = NGYBRetrofit.getInstance().getApi().getAppDetail(packageName);
+        appDetail.enqueue(new Callback<AppDetailBean>() {
             @Override
             public void onResponse(Call<AppDetailBean> call, Response<AppDetailBean> response) {
-                mAppDetailBean = response.body();
-                onDataLoadedSuccess();
+                data = response.body();
+                Toasty.info(getContext(), "" + data.getName(), Toast.LENGTH_SHORT).show();
+                onLoadDataSuccess();
             }
 
             @Override
             public void onFailure(Call<AppDetailBean> call, Throwable t) {
-                onDataLoadedError();
+                onDataLoadFailed();
             }
         });
     }
 
 ### 创建视图并且绑定 ###
+
+    
     @Override
     protected View onCreateContentView() {
-        View content = View.inflate(getContext(), R.layout.app_detail_content, null);
-        //应用信息
-        AppDetailInfoView appDetailInfoView = (AppDetailInfoView) content.findViewById(R.id.app_detail_info);
-        appDetailInfoView.bindView(mAppDetailBean);
-
-        //应用安全
-        AppDetailSecurityView appDetailSecurityView = (AppDetailSecurityView) content.findViewById(R.id.app_detail_security);
-        appDetailSecurityView.bindView(mAppDetailBean);
-
-        //应用截图
-        AppDetailGalleryView appDetailGalleryView = (AppDetailGalleryView) content.findViewById(R.id.app_detail_gallery);
-        appDetailGalleryView.bindView(mAppDetailBean);
-
-        //应用描述
-        AppDetailDesView appDetailDesView = (AppDetailDesView) content.findViewById(R.id.app_detail_des);
-        appDetailDesView.bindView(mAppDetailBean);
-
-        //底部条
-        AppDetailBottomBar appDetailBottomBar = (AppDetailBottomBar) content.findViewById(R.id.app_detail_bottom_bar);
-        appDetailBottomBar.bindView(mAppDetailBean);
-
-        return content;
+        View inflate = View.inflate(getContext(), R.layout.fragment_app_detail, null);
+        //app信息
+        AppDetailInfoView appDetailInfoView = inflate.findViewById(R.id.app_detail_info);
+        appDetailInfoView.bindView(data);
+        //app安全
+        AppDetailSecurityView appDetailSecurity = inflate.findViewById(R.id.app_detail_security);
+        appDetailSecurity.bindView(data);
+        //app截图
+        AppDetailGalleryView appDetailGallery = inflate.findViewById(R.id.app_detail_gallery);
+        appDetailGallery.bindView(data);
+        //app描述
+        AppDetailDesView appDetailDes = inflate.findViewById(R.id.app_detail_des);
+        appDetailDes.bindView(data);
+        DownloadButton downloadButton = inflate.findViewById(R.id.download_button);
+        downloadButton.syncState(data);//同步apk的下载状态
+        downloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DownloadManager.getInstance().handleClick(getContext(), data.getPackageName());
+            }
+        });
+        return inflate;
     }
+
 
 ### 应用信息 AppDetailInfoView ###
 
@@ -1267,110 +1607,124 @@ MainActivity中的状态栏颜色也是透明的，但为什么我在style中配
 
 
 #### 绑定视图 ####
-    public void bindView(AppDetailBean appDetailBean) {
-        //遍历安全相关数据
-        for (int i = 0; i < appDetailBean.getSafe().size(); i++) {
-            AppDetailBean.SafeBean safeBean = appDetailBean.getSafe().get(i);
-            //往Tag容器中添加一个tag
-            addTag(safeBean);
-            //创建一行描述
-            addDescriptionLine(safeBean);
-        }
-    }
 
-    private void addTag(AppDetailBean.SafeBean safeBean) {
-        ImageView tag = new ImageView(getContext());
-        Glide.with(getContext())
-                .load(URLProvider.getInstance().getImageUrl() + safeBean.getSafeUrl())
-                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                .into(tag);
-        mAppDetailSecurityTags.addView(tag);
-    }
-
-    @NonNull
-    private void addDescriptionLine(AppDetailBean.SafeBean safeBean) {
-        LinearLayout line = new LinearLayout(getContext());
-        ImageView ivDes = new ImageView(getContext());
-        //添加一个checkbox的图片
-        Glide.with(getContext())
-                .load(URLProvider.getInstance().getImageUrl() + safeBean.getSafeDesUrl())
-                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                .into(ivDes);
-        line.addView(ivDes);
-        //添加一行描述的文本
-        TextView tvDes = new TextView(getContext());
-        tvDes.setText(safeBean.getSafeDes());
-        //如果safeDesColor不为0，表示该app存在风险，给一个警告的颜色
-        if (safeBean.getSafeDesColor() == 0) {
-            tvDes.setTextColor(getResources().getColor(R.color.app_detail_safe_normal));
-        } else {
-            tvDes.setTextColor(getResources().getColor(R.color.app_detail_safe_warning));
+    
+    public void bindView(AppDetailBean data) {
+        int padding = getResources().getDimensionPixelSize(R.dimen.padding);
+        //遍历safe数组,获取每个元素的safeUrl(标签图片的url),创建ImageView添加到标签图片的容器tag_container
+        for (int i = 0; i < data.getSafe().size(); i++) {
+            AppDetailBean.SafeBean safeBean = data.getSafe().get(i);
+            ImageView tag = new ImageView(getContext());
+            Glide.with(getContext()).load(Constant.IMAGE_URL + safeBean.getSafeUrl()).override(100, 40).into(tag);
+            tagContainer.addView(tag);
+            //遍历safe数组,获取描述safeDes以及描述对应的图片safeDesUrl,创建一个水平方向的LinearLayout(1行)
+            //创建一行
+            LinearLayout line = new LinearLayout(getContext());
+            line.setOrientation(LinearLayout.HORIZONTAL);
+            line.setPadding(0, padding, 0, 0);
+            ImageView desIcon = new ImageView(getContext());
+            Glide.with(getContext()).load(Constant.IMAGE_URL + safeBean.getSafeDesUrl()).override(100, 40).into(desIcon);
+            //将图片加入一行的LinearLayout
+            line.addView(desIcon);
+            TextView des = new TextView(getContext());
+            des.setText(safeBean.getSafeDes());
+            //将描述文本加入一行的LinearLayout
+            line.addView(des);
+            //将一行加入描述的容器里面
+            descContainer.addView(line);
         }
-        line.addView(tvDes);
-        //添加一行到描述文本中
-        mAppDetailSecurityDes.addView(line);
     }
 
 #### 初始化高度和保存展开后高度 ####
-    private void init() {
+    `
+    public AppDetailSecurityView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         LayoutInflater.from(getContext()).inflate(R.layout.view_app_detail_security, this);
         ButterKnife.bind(this, this);
-
+        //监听布局完成,获取正常情况下描述容器高度,并保存,再初始化高度为0
+        //获取视图树的观察者,监听布局完成
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                //移除监听，则监听只执行一次
+                //只监听一次就可以了
                 getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //获取原始展开时的高度
-                mExpandHeight = mAppDetailSecurityDes.getMeasuredHeight();
-                //将mAppDetailSecurityDes置为0
-                ViewGroup.LayoutParams layoutParams = mAppDetailSecurityDes.getLayoutParams();
+                //获取正常情况下容器高度,即展开后的高度
+                expandHeight = descContainer.getMeasuredHeight();
+                //初始化高度为0
+                ViewGroup.LayoutParams layoutParams = descContainer.getLayoutParams();
                 layoutParams.height = 0;
-                mAppDetailSecurityDes.setLayoutParams(layoutParams);
+                descContainer.setLayoutParams(layoutParams);
             }
         });
-    }
+    }`
 
 #### 打开或者关闭 ####
-    /**
-     * 打开或者关闭安全信息
-     */
-    private void toggleSecurityInfo() {
-        if (securityInfoOpen) {
-            //折叠
-            animateViewHeight(mAppDetailSecurityDes, mExpandHeight, 0);
-            rotateView(mAppDetailSecurityArrow, -180, 0);
 
-        } else {
-            //展开
-            animateViewHeight(mAppDetailSecurityDes, 0, mExpandHeight);
-            rotateView(mAppDetailSecurityArrow, 0, -180);
-        }
-        securityInfoOpen = !securityInfoOpen;
-    }
+    
+	    @OnClick(R.id.arrow)
+	    public void onViewClicked() {
+	        //如果展开,则折叠
+	        if (isExpand) {
+	            //将高度从展开后的高度到0
+	//            ViewGroup.LayoutParams layoutParams = descContainer.getLayoutParams();
+	//            layoutParams.height = 0;
+	//            descContainer.setLayoutParams(layoutParams);
+	            AnimationUtils.animationViewHeight(descContainer, expandHeight, 0);
+	//            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(arrow, "rotation", -180, 0f);
+	//            objectAnimator.setDuration(500);
+	//            objectAnimator.start();
+	            AnimationUtils.rotateView(arrow, -180f, 0);
+	        } else {
+	//            //如果折叠,则展开
+	//            //将高度从0到展开后的高度
+	//            final ViewGroup.LayoutParams layoutParams = descContainer.getLayoutParams();
+	//            layoutParams.height = expandHeight;
+	//            //使用一个工具产生0---展开后高度的乙烯类变化值
+	//            ValueAnimator valueAnimator = ValueAnimator
+	//                    .ofInt(0, expandHeight);
+	//            valueAnimator.setDuration(500);
+	//            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+	//                @Override
+	//                public void onAnimationUpdate(ValueAnimator animation) {
+	//                    int height = (int) animation.getAnimatedValue();
+	//                    Log.e(TAG, "onAnimationUpdate: "+height );
+	//                    ViewGroup.LayoutParams layoutParams1 = descContainer.getLayoutParams();
+	//                    layoutParams1.height = height;
+	//                    descContainer.setLayoutParams(layoutParams1);
+	//                }
+	//            });
+	//            valueAnimator.start();;
+	            AnimationUtils.animationViewHeight(descContainer, 0, expandHeight);
+	//            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(arrow, "rotation", 0, -180f);
+	//            objectAnimator.setDuration(500);
+	//            objectAnimator.start();
+	            AnimationUtils.rotateView(arrow, 0, -180f);
+	        }
+	        isExpand = !isExpand;
+	    }
 
 #### 动画工具类 ####
-	public class UIUtils {
-	
-	    public static void animateViewHeight(final View view, int start, int end) {
+
+        public static void animationViewHeight(final View view, int start, int end) {
 	        ValueAnimator valueAnimator = ValueAnimator.ofInt(start, end);
-	        valueAnimator.start();
+	        valueAnimator.setDuration(500);
 	        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 	            @Override
 	            public void onAnimationUpdate(ValueAnimator animation) {
-	                int animatedValue = (int) animation.getAnimatedValue();
+	                int height = (int) animation.getAnimatedValue();//中间某一个变化值
 	                ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-	                layoutParams.height = animatedValue;
+	                layoutParams.height = height;
 	                view.setLayoutParams(layoutParams);
 	            }
 	        });
+	        valueAnimator.start();
 	    }
 	
-	    public static void rotateView(View view, int startAngle, int endAngle) {
+	    public static void rotateView(View view, float startAngle, float endAngle) {
 	        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "rotation", startAngle, endAngle);
+	        objectAnimator.setDuration(500);
 	        objectAnimator.start();
 	    }
-	}
 
 
 
@@ -1378,18 +1732,22 @@ MainActivity中的状态栏颜色也是透明的，但为什么我在style中配
 
 #### 绑定视图 ####
 
-    public void bindView(AppDetailBean appDetailBean) {
-        for (int i = 0; i < appDetailBean.getScreen().size(); i++) {
-            String screen = appDetailBean.getScreen().get(i);
+    
+    public void bindView(AppDetailBean data) {
+        List<String> screen = data.getScreen();
+        int padding = getResources().getDimensionPixelSize(R.dimen.padding);
+        for (int i = 0; i < screen.size(); i++) {
+            String url = screen.get(i);
             ImageView imageView = new ImageView(getContext());
-            int padding = getResources().getDimensionPixelSize(R.dimen.app_detail_pic_padding);
-            if (i == appDetailBean.getScreen().size() - 1) {
-                imageView.setPadding(padding, 0, padding, 0);
+            if (i == screen.size() - 1) {
+                //最后一个图片给一个右边距
+                imageView.setPadding(padding, padding, padding, padding);
             } else {
-				imageView.setPadding(padding, 0, 0, 0);
-			}
-            Glide.with(getContext()).load(Constant.URL_IMAGE + screen).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).into(imageView);
-            mAppDetailPicContainer.addView(imageView);
+                imageView.setPadding(padding, padding, 0, padding);
+            }
+            Glide.with(getContext()).load(Constant.IMAGE_URL + url).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).into(imageView);
+            //加入图片的容器
+            imageContainer.addView(imageView);
         }
     }
 
@@ -1397,19 +1755,24 @@ MainActivity中的状态栏颜色也是透明的，但为什么我在style中配
 ### 应用描述 AppDetailDesView ###
 
 #### 初始化高度和保存展开后高度 ####
-    private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.view_app_detail_des, this);
+
+    
+    public AppDetailDesView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        LayoutInflater.from(context).inflate(R.layout.view_app_detail_des, this);
         ButterKnife.bind(this, this);
+        //绘制流程没有走,测量没有走就没有高度
+        expandHeight = appDesc.getMeasuredHeight();
+        //视图树的观察者监听绘制流程中布局的完成
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mAppDetailDes.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //保存全部展开后的大小
-                mDesExpandHeight = mAppDetailDes.getHeight();
-                //若初始化时行数大于7行则设置高度为7，小于7行就是原本的高度
-                if (mAppDetailDes.getLineCount() > MAX_LINES) {
-                    //设置初始显示7行
-                    mAppDetailDes.setLines(7);
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                //获取正常展开后的高度
+                expandHeight = appDesc.getMeasuredHeight();
+                //如果高度大于7行,则设置成7行
+                if (appDesc.getLineCount() > 7) {
+                    appDesc.setLines(7);
                 }
             }
         });
@@ -1417,96 +1780,74 @@ MainActivity中的状态栏颜色也是透明的，但为什么我在style中配
 
 #### 打开或者关闭 ####
 
-    private void toggleDescription() {
-        if (descriptionOpen) {
-            //折叠
-            //从展开后的高度到原始高度
-            animateViewHeight(mAppDetailDes, mDesExpandHeight, mDesOriginalHeight);
-            //旋转小箭头
-            rotateView(mAppDetailDesArrow, -180, 0);
-
+    
+    @OnClick(R.id.arrow)
+    public void onViewClicked() {
+        if (isExpand) {
+            //折叠  从展开后的高度到起始高度
+            AnimationUtils.animationViewHeight(appDesc, expandHeight, startHeight);
+            AnimationUtils.rotateView(arrow, -180f, 0);
         } else {
             //展开
-            //获取展开前的原始高度，保存
-            mDesOriginalHeight = mAppDetailDes.getMeasuredHeight();
-            //从原始高度到展开后的高度
-            animateViewHeight(mAppDetailDes, mDesOriginalHeight, mDesExpandHeight);
-            //旋转小箭头
-            rotateView(mAppDetailDesArrow, 0, -180);
+            startHeight = appDesc.getMeasuredHeight();
+            AnimationUtils.animationViewHeight(appDesc, startHeight, expandHeight);
+            AnimationUtils.rotateView(arrow, 0, -180f);
         }
-        descriptionOpen = !descriptionOpen;
+        isExpand = !isExpand;
     }
 
 
 #### 自定义控件DownloadButton ####
 
 
-	public class DownloadButton extends AppCompatButton implements DownloadUpdateListener{
-	
+    
 	    @Override
 	    protected void onDraw(Canvas canvas) {
-	        //是否绘制进度
 	        if (enableProgress) {
-	            //根据进度计算出drawable的右边位置
-	            int right = (int) ((mProgress * 1.0f / 100) * getWidth());
-	            mDrawable.setBounds(0, 0, right, getHeight());
-	            //将drawable绘制到画布上
-	            mDrawable.draw(canvas);
+	            //绘制进度
+	            int right = (int) (progress * 1.0f / 100 * getWidth());//根据进度计算矩形的右边位置
+	//            canvas.drawRect(0,,right,getHeight(),paint);
+	            drawable.setBounds(0, 0, right, getHeight());
+	            drawable.draw(canvas);
 	        }
-	        //必须调用父类方法完成Button本身的绘制
-	        super.onDraw(canvas);
+	        super.onDraw(canvas);//不要去掉,super.onDraw实现了按钮文本的绘制
 	    }
-	}
 
 # 应用下载 #
 ## DownloadManager ##
 DownloadManger完成对应用下载的管理，使用单例模式。
 
-	public class DownloadManager{
-
-	    public static DownloadManager getInstance() {
-	        if (sDownloadManager == null) {
-	            synchronized (DownloadManager.class) {
-	                if (sDownloadManager == null) {
-	                    sDownloadManager = new DownloadManager();
-	                }
-	            }
-	        }
-	        return sDownloadManager;
-	    }
-	}
-
-## 创建APK存放目录 ##
-
-    //下载apk的存放路径，当应用被卸载时，该路径下的文件也会被删除
-    private static final String DOWNLOAD_DIRECTORY = Environment.getExternalStorageDirectory()
-		 + "/Android/data/包名/apk/";
-
-    public void createDownloadDirectory() {
-        File directoryFile = new File(DOWNLOAD_DIRECTORY);
-        if (!directoryFile.exists()) {
-            directoryFile.mkdirs();
+    
+    public static DownloadManager getInstance() {
+        if (downloadManager == null) {
+            synchronized (DownloadManager.class) {
+                if (downloadManager == null) {
+                    downloadManager = new DownloadManager();
+                }
+            }
         }
+        return downloadManager;
     }
 
-	//MainActivity
-	//由于需要在磁盘上创建目录，在Android6.0上需要动态申请权限，我们在MainActivity检查权限。
-    private void checkStoragePermission() {
-        int result = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_DENIED) {
-            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            ActivityCompat.requestPermissions(this, permissions, 0);
+## 创建APK存放目录 ##
+    
+    public void createDownloadDir() {
+        File file = new File(DOWNLOAD_DIR);
+        if (!file.exists()) {
+            //如果文件夹的路径不存在,则创建该文件夹
+            file.mkdirs();//如果父目录不存在,则还会创建父目录
         }
     }
 
 ## 下载状态 ##
-    public static final int STATE_UN_DOWNLOAD = 0;//未下载
-    public static final int STATE_DOWNLOADING = 1;//下载中
-    public static final int STATE_PAUSE = 2;//暂停下载
-    public static final int STATE_WAITING = 3;//等待下载
-    public static final int STATE_FAILED = 4;//下载失败
-    public static final int STATE_DOWNLOADED = 5;//下载完成
-    public static final int STATE_INSTALLED = 6;//已安装
+
+        public static final int STATE_UN_DOWNLOAD = 0; //未下载
+	    public static final int STATE_DOWNLOADING = 1; //下载中
+	    public static final int STATE_PAUSE = 2; //暂停下载
+	    public static final int STATE_WAITING = 3; //等待下载
+	    public static final int STATE_FAILED = 4; //下载失败
+	    public static final int STATE_DOWNLOADED = 5; //下载完成
+	    public static final int STATE_INSTALLED = 6;//已安装
 
 
 
@@ -1514,43 +1855,55 @@ DownloadManger完成对应用下载的管理，使用单例模式。
 ## 下载数据结构 DownloadInfo##
 由于下载一个app的过程中会产成很多数据，包括下载app的名字，下载的进度，下载的状态等，这里构建一个描述下载一个app的数据结构。另外在app列表界面和app详情界面需要共享一个应用的下载信息的。
 	
-	public class DownloadInfo {
-	    public String packageName;//下载应用的包名
-	    public String downloadUrl;//下载应用的url
-	    public String filePath;//下载应用的文件路径
-	    public int downloadStatus = DownloadManager.STATE_UN_DOWNLOAD;//下载状态
-	    public Runnable downloadTask;//下载的runnable
-		public int apkSize;//APK大小
-	    public int downloadSize;//已下载apk的大小
-	    public int progress;//下载进度0-100
-		public DownloadUpdateListener listener;//下载更新监听器
+    public class DownloadInfo {
+	    public int progress; //0---100
+	    public int downloadStatus;//下载状态
+	    public String packageName;//包名
+	    public long apkSize;//apk大小
+	    public long downloadSize;//已经下载了多少
+	    public String filePath;//apk文件路径
+	    public String downloadUrl;//apk下载的url
+	    public UpdateDownloadInfoListener listener; //监听器
+	    public DownloadManager.DownloadTask downloadTask; //下载任务
 	}
 
 
 ## 获取DownloadInfo ##
-	   public DownloadInfo getDownloadInfo(Context context, String packageName, int size, String downloadUrl) {
-	        //如果已经初始化过对应包名的下载信息，则直接返回
-	        if (mDownloadInfoMap.get(packageName) != null) {
-	            return mDownloadInfoMap.get(packageName);
-	        }
-	        DownloadInfo downloadInfo = new DownloadInfo();
-	        downloadInfo.packageName = packageName;
-	        downloadInfo.apkSize = size;
-	        downloadInfo.downloadUrl = downloadUrl;
-	
-	        if (isInstalled(context, packageName)) {
-	            downloadInfo.downloadStatus = STATE_INSTALLED;
-	        } else if (isDownloaded(downloadInfo)) {
-	            downloadInfo.downloadStatus = STATE_DOWNLOADED;
-	        } else {
-	            downloadInfo.downloadStatus = STATE_UN_DOWNLOAD;
-	        }
-	        //保存下载信息
-	        mDownloadInfoMap.put(downloadInfo.packageName, downloadInfo);
-	        return downloadInfo;
-	    }
+
+    
+    public DownloadInfo getDownloadInfo(Context context, String packageName, int apkSize, String downloadUrl) {
+        //先查缓存,如果缓存里面存在,则直接返回
+        if (downloadInfoHashMap.get(packageName) != null) {
+            return downloadInfoHashMap.get(packageName);
+        }
+
+        DownloadInfo downloadInfo = new DownloadInfo();
+        //添加下载相关的信息
+        downloadInfo.apkSize = apkSize;
+        downloadInfo.packageName = packageName;
+        //保存下载的url
+        downloadInfo.downloadUrl = downloadUrl;
+        //拿到对应包名的app里面的activity信息
+        if (isInstalled(context, packageName)) {
+            //判断是否已经安装
+            downloadInfo.downloadStatus = STATE_INSTALLED;
+        } else if (isDownloaded(downloadInfo)) {
+            downloadInfo.downloadStatus = STATE_DOWNLOADED;
+        } else {
+            downloadInfo.downloadStatus = STATE_UN_DOWNLOAD;
+        }
+        //缓存downloadinfo
+        downloadInfoHashMap.put(packageName, downloadInfo);
+        return downloadInfo;
+    }
 ## 是否安装 ##
 
+    
+    /**
+     * @param context
+     * @param packageName
+     * @return 判断是否已经安装apk
+     */
     private boolean isInstalled(Context context, String packageName) {
         try {
             context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
@@ -1563,254 +1916,326 @@ DownloadManger完成对应用下载的管理，使用单例模式。
 
 ## 打开App ##
 
-    private void openApp(Context context, DownloadInfo downloadInfo) {
-        Intent intent = context.getPackageManager().getLaunchIntentForPackage(downloadInfo.getPackageName());
-        context.startActivity(intent);
+    
+    private void openApp(Context context, String packageName) {
+        Intent launchIntentForPackage = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        context.startActivity(launchIntentForPackage);
     }
 
 ## 是否已下载 ##
 
+    
     /**
-     * 是否已经下载
+     * @param downloadInfo
+     * @return 是否已经下载完成
      */
     private boolean isDownloaded(DownloadInfo downloadInfo) {
-        String filePath = DOWNLOAD_DIRECTORY + downloadInfo.packageName + ".apk";
-        downloadInfo.filePath = filePath;
-        File file = new File(filePath);
-        if (file.exists()) {
-            if (file.length() == downloadInfo.apkSize) {
+        //获取下载目录中的apk文件的大小,比较是否很apk应该有的大小一致,如果一致,则下载完成
+        //创建一个apk对应文件
+        String filePath = DOWNLOAD_DIR + downloadInfo.packageName + ".apk";//apk对应的路径
+        downloadInfo.filePath = filePath;//更新apk 的文件路径
+        File apk = new File(filePath);
+        if (apk.exists()) {
+            //保存已经下载的大小,为了断电续传
+            downloadInfo.downloadSize = apk.length();
+            //判断大小,是否一致
+            if (apk.length() == downloadInfo.apkSize) {
                 return true;
-            } else {
-                //记录已经下载了多少
-                downloadInfo.downloadSize = file.length();
-                return false;
             }
         }
         return false;
     }
 
 ## 安装App ##
-    /**
-     * 安装apk, 在模拟器上可能失败，模拟器如果是x86而应用不支持
-     * 
-     * D/InstallAppProgress: Installation error code: -113
-     * http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android
-     * /5.1.1_r1/android/content/pm/PackageManager.java#PackageManager.0INSTALL_FAILED_INVALID_APK
-     * 
-     * public static final int INSTALL_FAILED_NO_MATCHING_ABIS = -113;
-     */
-    private void installApk(Context context, DownloadInfo downloadInfo) {
-        File file = new File(downloadInfo.getFilePath());
+
+    
+    private void installApk(Context context, String packageName) {
+        //7.0以前,跳转系统安装界面,让系统安装程序获取apk文件去安装
+        //FileUriExposedException
+        String filePath = DOWNLOAD_DIR + packageName + ".apk";//apk对应的路径
+        File file = new File(filePath);
+        Uri uri = null;//apk文件对应
+        Intent intent = new Intent(Intent.ACTION_VIEW);
         if (file.exists()) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                //大于等于版本7.0
+                uri = FileProvider.getUriForFile(context, "cqq.googleplay.fileprovider", file);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//暂时授权获取apk文件
+            } else {
+                uri = Uri.fromFile(file);
+            }
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
             context.startActivity(intent);
         }
     }
 
 ### 安装apk7.0适配 ###
-    <provider
-        android:name="android.support.v4.content.FileProvider"
-        android:authorities="com.itheima.googleplaydemo.fileprovider"
-        android:exported="false"
-        android:grantUriPermissions="true">
-        <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/file_paths"/>
-    </provider>
 
-	<paths>
-	    <external-path name="apk" path="/Android/data/com.itheima.googleplaydemo/" />
-	</paths>
-
-    private void installApk(Context context, DownloadInfo downloadInfo) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        File file = new File(downloadInfo.filePath);
-        Uri uri = null;
-        if (file.exists()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                uri = FileProvider.getUriForFile(context, "com.itheima.googleplaydemo.fileprovider", file);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            } else {
-                uri = Uri.fromFile(file);
-            }
-            intent.setDataAndType(uri, "application/vnd.android.package-archive");
-            //启动安装器打开apk文件
-            context.startActivity(intent);
-        }
-    }
+    
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="cqq.googleplay.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
 ## 下载等待 ##
 当执行下载任务之前，先进入等待状态
 
-    public void downloadApk(DownloadInfo downloadInfo) {
-        DownloadTask downloadTask = new DownloadTask(downloadInfo);
-        downloadInfo.downloadStatus = STATE_WAITING;
-        new Thread(new DownloadTask(downloadInfo)).start();
-    }
+    
+    private void downloadApk(DownloadInfo downloadInfo) {
+	        //开始下载是,状态更新等待状态
+	        downloadInfo.downloadStatus = STATE_WAITING;
+	        //通知UI   更新状态
+	//        downloadInfo.listener.onUpdate(downloadInfo);
+	        notifyDownloadInfoChange(downloadInfo);
+	//        new Thread(new DownloadTask(downloadInfo)).start();
+	        DownloadTask downloadTask = new DownloadTask(downloadInfo);
+	        //将下载任务保存在下载信息里面
+	        downloadInfo.downloadTask = downloadTask;
+	        threadPoolExecutor.execute(downloadTask);
+	    }
 
 
 ## 下载任务 ##
 
-    private class DownloadTask implements Runnable {
-
-        private DownloadInfo mDownloadInfo;
-
-        private DownloadTask(DownloadInfo downloadInfo) {
-            mDownloadInfo = downloadInfo;
-        }
-
-        @Override
-        public void run() {
-            InputStream inputStream = null;
-            FileOutputStream fileOutputStream = null;
-            try {
-                File file = new File(mDownloadInfo.filePath);
-                if (!file.exists()) {
-                    file.createNewFile();
-                }
-                //获取下载apk的url,传入当前下载进度，用作断点续传
-                String url = URLUtils.getDownloadURL(mDownloadInfo.downloadUrl, mDownloadInfo.progress);
-                Request request = new Request.Builder().url(url).get().build();
-                //同步请求
-                Response response = mOkHttpClient.newCall(request).execute();
-                if (response.isSuccessful()) {
-                    inputStream = response.body().byteStream();
-                    fileOutputStream = new FileOutputStream(file, true);//往文件后面写数据
-                    byte[] buffer = new byte[1024];
-                    int len = -1;
-                    while ((len = inputStream.read(buffer)) != -1) {
-                        //如果下载的状态变为暂停，跳出循环
-                        if (mDownloadInfo.downloadStatus == STATE_PAUSE) {
-                            return;
-                        }
-                        fileOutputStream.write(buffer, 0, len);
-                        //更新状态
-                        mDownloadInfo.downloadStatus = STATE_DOWNLOADING;
-
-                    }
-                    ........
-        }
-    }
+    
+	    public class DownloadTask implements Runnable {
+	        private DownloadInfo downloadInfo;
+	
+	        public DownloadTask(DownloadInfo downloadInfo) {
+	            this.downloadInfo = downloadInfo;
+	        }
+	
+	        @Override
+	        public void run() {
+	            //开始下载apk
+	            String url = "http://47.105.71.243:8080/GooglePlayServer/download?name=" + downloadInfo.downloadUrl + "&range=" + downloadInfo.downloadSize;
+	//            String url = "http://192.168.0.103:8080/GooglePlayServer/download?name="+ downloadInfo.downloadUrl+"&range="+downloadInfo.downloadSize;
+	            Request request = new Request.Builder().get().url(url).build();
+	            OkHttpClient okHttpClient = new OkHttpClient();
+	            InputStream inputStream = null;
+	            FileOutputStream fileOutputStream = null;
+	            try {
+	                Response res = okHttpClient.newCall(request).execute();
+	                if (res.isSuccessful()) {
+	                    File file = new File(downloadInfo.filePath);
+	                    if (!file.exists()) {
+	                        file.createNewFile();//不存在文件则创建
+	                    }
+	                    inputStream = res.body().byteStream();//输入流
+	                    //输出流
+	                    fileOutputStream = new FileOutputStream(file, true);//true写到文件末尾,处理断电续传
+	                    //定义Buffer
+	                    byte[] buffer = new byte[1024];//每次读1kb
+	                    int len = -1;//读取字节数
+	                    while ((len = inputStream.read(buffer)) != -1) {//从输入入流读取1024字节,如果读取结束read返回-1
+	                        //判断是否为暂停下载状态,如果是则跳出循环
+	                        if (downloadInfo.downloadStatus == STATE_PAUSE) {
+	                            return;
+	                        }
+	                        //将buffer字节写入输出流
+	                        fileOutputStream.write(buffer, 0, len);
+	                        downloadInfo.downloadSize += len;//计算已经下载字节大小
+	                        //计算进度0--100
+	                        int progress = (int) (downloadInfo.downloadSize * 1.0f / downloadInfo.apkSize * 100);
+	                        //进度变大才进行刷新绘制,优化
+	                        if (progress > downloadInfo.progress) {
+	                            downloadInfo.progress = progress;
+	                            downloadInfo.downloadStatus = STATE_DOWNLOADING;//更新状态,正在下载的状态
+	//                            downloadInfo.listener.onUpdate(downloadInfo);
+	                            notifyDownloadInfoChange(downloadInfo);
+	                        }
+	                        //断电续传,如果进入达到100,那么不要在读数据,直接跳出循环,否则出现超时
+	                        if (progress == 100) {
+	                            break;
+	                        }
+	                    }
+	                    //更新状态为已经下载完成
+	                    downloadInfo.downloadStatus = STATE_DOWNLOADED;
+	//                    downloadInfo.listener.onUpdate(downloadInfo);
+	                    notifyDownloadInfoChange(downloadInfo);
+	                } else {
+	                    //失败
+	                    downloadInfo.downloadStatus = STATE_FAILED;
+	//                    downloadInfo.listener.onUpdate(downloadInfo);
+	                    notifyDownloadInfoChange(downloadInfo);
+	                }
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                //失败
+	                downloadInfo.downloadStatus = STATE_FAILED;
+	//                    downloadInfo.listener.onUpdate(downloadInfo);
+	                notifyDownloadInfoChange(downloadInfo);
+	            } finally {
+	                //关闭输入输出流
+	                closeStream(inputStream);
+	                closeStream(fileOutputStream);
+	            }
+	        }
+	    }
 
 ## 通知更新进度 ##
-	public interface DownloadUpdateListener {
-	    void onUpdate(DownloadInfo downloadInfo);
-	}
 
-
-    private void notifyDownloadInfoUpdate(DownloadInfo downloadInfo) {
-        if (downloadInfo.listener != null) {
-            downloadInfo.listener.onUpdate(downloadInfo);
+    
+    private void notifyDownloadInfoChange(DownloadInfo downloadInfo) {
+        if (downloadInfo != null) {
+            downloadInfo.listener.OnUpdate(downloadInfo);
         }
     }
 
 ## 通知等待状态 ##
-    public void downloadApk(DownloadInfo downloadInfo) {
-        notifyDownloadInfoUpdate(downloadInfo);
-    }
+
+    
+	    private void downloadApk(DownloadInfo downloadInfo) {
+	        //开始下载是,状态更新等待状态
+	        downloadInfo.downloadStatus = STATE_WAITING;
+	        //通知UI   更新状态
+	//        downloadInfo.listener.onUpdate(downloadInfo);
+	        notifyDownloadInfoChange(downloadInfo);
+	//        new Thread(new DownloadTask(downloadInfo)).start();
+	        DownloadTask downloadTask = new DownloadTask(downloadInfo);
+	        //将下载任务保存在下载信息里面
+	        downloadInfo.downloadTask = downloadTask;
+	        threadPoolExecutor.execute(downloadTask);
+	    }
 
 ## 通知下载进度 ##
-	//更新下载进度
-    mDownloadInfo.downloadSize += len;
-    int progress = (int) ((mDownloadInfo.downloadSize * 1.0f / mDownloadInfo.apkSize) * 100);
-    if (progress > mDownloadInfo.progress) {
-        mDownloadInfo.progress  = progress;
-        notifyDownloadInfoUpdate(mDownloadInfo);//进度发生大于等于1%的变化，才通知更新UI
-    }
+
+            if (apk.exists()) {
+	            //保存已经下载的大小,为了断电续传
+	            downloadInfo.downloadSize = apk.length();
+	            //判断大小,是否一致
+	            if (apk.length() == downloadInfo.apkSize) {
+	                return true;
+	            }
+	        }
+	        return false;
 
 ## 下载完成去除矩形进度条 ##
-    public void clearProgress() {
-        enableProgress = false;
-        invalidate();
+
+    
+    private void cancelDownload(DownloadInfo downloadInfo) {
+        //从任务队列移除任务
+        threadPoolExecutor.remove(downloadInfo.downloadTask);
+        //通知更新UI
+        downloadInfo.downloadStatus = STATE_UN_DOWNLOAD;
+        notifyDownloadInfoChange(downloadInfo);
     }
 
 ## 暂停下载 ##
 暂停下载只需设置下载状态为STATE_PAUSE，在下载任务while循环中判断是否为暂停状态，如果是则跳出循环。
 
-    private void pauseDownload(DownloadInfo downloadInfo) {
-        downloadInfo.downloadStatus = STATE_PAUSE;
-        notifyDownloadInfoUpdate(downloadInfo);
-    }
-
-
-    //如果下载的状态变为暂停，跳出循环
-    if (mDownloadInfo.getDownloadStatus() == STATE_PAUSE) {
-        return;
-    }
+    
+	    private void pauseDownload(DownloadInfo downloadInfo) {
+	        //将状态改为暂停状态
+	        downloadInfo.downloadStatus = STATE_PAUSE;
+	        //通知更新ui更新状态
+	//        downloadInfo.listener.onUpdate(downloadInfo);
+	        notifyDownloadInfoChange(downloadInfo);
+	    }
 
 
 ## 继续下载 ##
 继续下载只需重新执行下载即可。
 
-    case DownloadManager.STATE_PAUSE:
-         downloadApk(downloadInfo);
-         break;
+                case STATE_PAUSE:
+	                //继续下载
+	                downloadApk(downloadInfo);
+	                break;
 
 
 ## 下载失败更新ui ##
 
-    //更新状态下载失败
-    mDownloadInfo.downloadStatus = STATE_FAILED;
-    notifyDownloadInfoUpdate(mDownloadInfo);
-
-    case DownloadManager.STATE_FAILED:
-         setText(R.string.retry);
-         break;
+                case STATE_FAILED:
+	                //重试下载,即断电续传
+	                downloadApk(downloadInfo);
+	                break;
 
 
 ## 重试下载 ##
-    case DownloadManager.STATE_FAILED:
-        downloadApk(downloadInfo);
-        break;
+
+                case STATE_FAILED:
+	                //重试下载,即断电续传
+	                downloadApk(downloadInfo);
+	                break;
 
 
 # CircleDownloadView的实现 #
 
 
 ## 同步状态
-    public void syncState(AppListItemBean item) {
-        mDownloadInfo = DownloadManager.getInstance().getDownloadInfo(getContext(), item.getPackageName(), item.getSize(), item.getDownloadUrl());
-        mDownloadInfo.listener = this;
-        updateStatus(mDownloadInfo);
+
+    
+    /**
+     * @param appItemBean 同步下载的信息
+     */
+    public void syncState(AppItemBean appItemBean) {
+        //如果是ListView回收回来的,断掉与之前app下载的联系
+        if (downloadInfo != null) {
+            //二手的CircleDownloadView  appItemBean还是之前绑定过的数据, downloadInfo也是之前的app的数据
+            //断掉与之前app的联系,将监听器置为null,就不会收到以前app下载的更新
+            downloadInfo.listener = null;
+        }
+        this.appItemBean = appItemBean;
+        //拿到新的app的下载信息
+        downloadInfo = DownloadManager.getInstance().getDownloadInfo(getContext(), appItemBean.getPackageName(),
+                appItemBean.getSize(), appItemBean.getDownloadUrl());
+        downloadInfo.listener = this;//CircleDownloadView监听新的app下载信息
+        //更新下载信息更新UI
+        update(downloadInfo);
     }
 ## 点击处理 ##
-    @OnClick(R.id.download)
-    public void onViewClick() {
-        DownloadManager.getInstance().handleDownloadButtonClick(getContext(), mDownloadInfo.packageName);
+
+    
+    @OnClick(R.id.download_icon)
+    public void onViewClicked() {
+        DownloadManager.getInstance().handleClick(getContext(), appItemBean.getPackageName());
     }
 
 
 ## 等待状态更新 ##
-    case DownloadManager.STATE_WAITING:
-        mDownloadText.setText(R.string.waiting);
-        mDownload.setImageResource(R.drawable.ic_cancel);
-        break;
+
+                case STATE_WAITING:
+	                //取消下载
+	                cancelDownload(downloadInfo);
+	                break;
 
 
 ## 绘制 ##
 
-    //一般情况下自定义的ViewGroup不会绘制自己，除非给它设置背景，所以我们打开绘制自定义ViewGroup的开关
-   	setWillNotDraw(false);
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        if (enableProgress) {
-            int left = mDownload.getLeft() -3;
-            int top = mDownload.getTop() - 3;
-            int right = mDownload.getRight() + 3;
-            int bottom = mDownload.getBottom() + 3;
-            mRectF.set(left, top, right, bottom);
-            float sweepAngle = mProgress * 1.0f / 100 * 360;
-            canvas.drawArc(mRectF, -90, sweepAngle, false, mPaint);
-        }
-    }
+    
+	    @Override
+	    protected void onDraw(Canvas canvas) {
+	        if (enableProgress) {
+	            //更加ImageView的边界,计算圆弧的边界
+	            int left = downloadIcon.getLeft() - 5;
+	            int top = downloadIcon.getTop() - 5;
+	            int right = downloadIcon.getRight() + 5;
+	            int bottom = downloadIcon.getBottom() + 5;
+	            rectF.set(left, top, right, bottom);
+	            float startAngle = -90;
+	//            float sweepAngle = 45;
+	            //根据进度计算扫过的角度
+	            float sweepAngel = (progress * 1.0f / 100) * 360;
+	            boolean userCenter = false;
+	            canvas.drawArc(rectF, startAngle, sweepAngel, userCenter, paint);
+	        }
+	    }
 
 ## 更新进度 ##
-    private void setProgress(int progress) {
-        mProgress = progress;
-        String progressString = String.format(getResources().getString(R.string.download_progress), progress);
-        mDownloadText.setText(progressString);
+
+    
+    public void setProgress(int progress) {
+        this.progress = progress;
+        //更新文本
+        String progressString = progress + "%";
+        downloadText.setText(progressString);
+        //触发onDraw重新调用
+        invalidate();
     }
 
 ## 更新下载完成 ##
@@ -1820,35 +2245,79 @@ DownloadManger完成对应用下载的管理，使用单例模式。
 ## 更新下载失败状态 ##
 
 ## 断点续传问题 ##
-    //断点续传时，当下载结束后会出现超时异常，服务器没有返回
-    if (mDownloadInfo.progress == mDownloadInfo.size) {
-       //下载完成跳出循环
-       break;
-    }
+
+    `            //判断大小,是否一致
+	            if (apk.length() == downloadInfo.apkSize) {
+	                return true;
+	            }`
 
 ## ListView回收问题 ##
-    public void syncState(AppListItemBean item) {
-        if (mDownloadInfo != null) {
-            //说明这个CircleDownloadView被使用过，正在监听旧的DownloadInfo的更新
-            //将之前的mDownloadInfo的监听器置为null
-            mDownloadInfo.listener = null;
+
+    
+    /**
+     * @param appItemBean 同步下载的信息
+     */
+    public void syncState(AppItemBean appItemBean) {
+        //如果是ListView回收回来的,断掉与之前app下载的联系
+        if (downloadInfo != null) {
+            //二手的CircleDownloadView  appItemBean还是之前绑定过的数据, downloadInfo也是之前的app的数据
+            //断掉与之前app的联系,将监听器置为null,就不会收到以前app下载的更新
+            downloadInfo.listener = null;
+        }
+        this.appItemBean = appItemBean;
+        //拿到新的app的下载信息
+        downloadInfo = DownloadManager.getInstance().getDownloadInfo(getContext(), appItemBean.getPackageName(),
+                appItemBean.getSize(), appItemBean.getDownloadUrl());
+        downloadInfo.listener = this;//CircleDownloadView监听新的app下载信息
+        //更新下载信息更新UI
+        update(downloadInfo);
+    }
+
+    private void update(DownloadInfo downloadInfo) {
+        switch (downloadInfo.downloadStatus) {
+            case DownloadManager.STATE_INSTALLED:
+                downloadText.setText("打开");
+                downloadIcon.setImageResource(R.mipmap.ic_install);
+                break;
+            case DownloadManager.STATE_DOWNLOADED:
+                downloadText.setText("安装");
+                downloadIcon.setImageResource(R.mipmap.ic_install);
+                clearProgress();
+                break;
+            case DownloadManager.STATE_UN_DOWNLOAD:
+                clearProgress();
+                downloadIcon.setImageResource(R.mipmap.action_download);
+                downloadText.setText("下载");
+                break;
+            case DownloadManager.STATE_WAITING:
+                downloadText.setText("等待");
+                downloadIcon.setImageResource(R.mipmap.ic_cancel);
+                break;
+            case DownloadManager.STATE_DOWNLOADING:
+                enableProgress = true;//确保开启绘制进度
+                setProgress(downloadInfo.progress);//更新进度
+                downloadIcon.setImageResource(R.mipmap.ic_pause);
+                break;
+            case DownloadManager.STATE_PAUSE:
+                downloadText.setText("继续");
+                downloadIcon.setImageResource(R.mipmap.action_download);
+                break;
+            case DownloadManager.STATE_FAILED:
+                downloadText.setText("重试");
+                downloadIcon.setImageResource(R.mipmap.ic_redownload);
+                clearProgress();
+                break;
         }
     }
 
-    private void updateStatus(DownloadInfo downloadInfo) {
-        mDownloadInfo = downloadInfo;
-        switch (downloadInfo.downloadStatus) {
-            case DownloadManager.STATE_UN_DOWNLOAD:
-                clearProgress();//重置进度条
-                break;
-
 ## 详情界面返回时刷新界面 ##
 
+    
     @Override
     public void onResume() {
         super.onResume();
-        if (getAdapter() != null) {
-            getAdapter().notifyDataSetChanged();
+        if (getListAdapter()!=null){
+            getListAdapter().notifyDataSetChanged();
         }
     }
 
@@ -1996,16 +2465,22 @@ Android中耗时的操作，都会开子线程，线程的创建和销毁是要�
 
 
 ## 线程池的创建 ##
-    private ThreadPoolExecutor mThreadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
+
+    private ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);//创建固定大小的线程池,2个线程,返回的为ThreadPoolExecutor
 
 ## 线程池中执行Runnable ##
-	mThreadPoolExecutor.execute(downloadTask);
+
+            threadPoolExecutor.execute(downloadTask);
 
 ## 取消下载 ##
+
+    
     private void cancelDownload(DownloadInfo downloadInfo) {
-        mThreadPoolExecutor.remove(downloadInfo.downloadTask);
+        //从任务队列移除任务
+        threadPoolExecutor.remove(downloadInfo.downloadTask);
+        //通知更新UI
         downloadInfo.downloadStatus = STATE_UN_DOWNLOAD;
-        notifyDownloadInfoUpdate(downloadInfo);
+        notifyDownloadInfoChange(downloadInfo);
     }
 
 # 扩展内容 #
@@ -2026,29 +2501,36 @@ Cache-Control 是最重要的规则。这个字段用于指定所有缓存机制
 * [Header Field Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
 
 #### 配置OKhttp的缓存目录 ####
-    public void init(Context context) {
-		//指定缓存路径
-        String directoryPath = context.getCacheDir().getAbsolutePath() + "/responses";
-        File directory = new File(directoryPath);
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .cache(new Cache(directory, DEFAULT_CACHE_SIZE))//指定缓存目录和大小
-                .addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)//网络拦截器
-                .build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.HOST)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        mApi = retrofit.create(Api.class);
-    }
+
+    
+	    public void init(Context context) {
+	        Gson gson = new GsonBuilder().setLenient().create();//创建Gson  设置宽大处理,可以接受畸形json字符串
+	        String cacheDir = context.getCacheDir() + "/responses";
+	        File file = new File(cacheDir);
+	        if (!file.exists()) {
+	            file.mkdirs();
+	        }
+	        //创建OkhttpClient配置磁盘缓存目录
+	        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+	                .addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+	//                .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+	                .cache(new Cache(file, DEFAULT_CACHE_SIZE))
+	                .build();
+	        //创建Retrofit对象
+	        Retrofit retrofit = new Retrofit.Builder()
+	                .addConverterFactory(GsonConverterFactory.create(gson))//添加Gson转换器的工厂
+	                .client(okHttpClient).baseUrl(Constant.BASE_URL).build();
+	        //使用retrofit初始化API接口
+	        api = retrofit.create(Api.class);
+	    }
 
 #### 初始化 ####
-	public class GooglePlayApplication extends Application {
-	
+
+    public class MyApplication extends Application {
 	    @Override
 	    public void onCreate() {
 	        super.onCreate();
-	        NetworkManager.init(getApplicationContext());
+	        NGYBRetrofit.getInstance().init(getApplicationContext());
 	    }
 	}
 
@@ -2056,18 +2538,16 @@ Cache-Control 是最重要的规则。这个字段用于指定所有缓存机制
 #### 重写网络响应的Cache-Control ####
 如果服务器在网络响应头里配置了Cache-Contorol，那么其实客户端是不需要做任何事情就能使用缓存的，但如果服务器没有配置，我们可以拦截这个网络响应，加入我们自己的配置。
 
+    
     /**
      * Dangerous interceptor that rewrites the server's cache-control header.
+     * 网络拦截器
      */
     private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
         @Override
-        public Response intercept(Interceptor.Chain chain) throws IOException {
+        public Response intercept(Chain chain) throws IOException {
             Response originalResponse = chain.proceed(chain.request());
-            //设置5分钟后缓存过期
-            CacheControl.Builder builder = new CacheControl.Builder().maxAge(5, TimeUnit.MINUTES);
-            return originalResponse.newBuilder()
-                    .header(CACHE_CONTROL, builder.build().toString())
-                    .build();
+            return originalResponse.newBuilder().header("Cache-Control", "max-age=300").build();
         }
     };
 
@@ -2088,50 +2568,56 @@ Cache-Control 是最重要的规则。这个字段用于指定所有缓存机制
 ### 使用工厂模式创建Fragment ###
 根据不同的条件，生产出不同的对象。
 
-	//FragmentFactory
-
-    private static final int FRAGMENT_HOME = 0;
-    private static final int FRAGMENT_APP = 1;
-    private static final int FRAGMENT_GAME = 2;
-    private static final int FRAGMENT_SUBJECT = 3;
-    private static final int FRAGMENT_RECOMMEND = 4;
-    private static final int FRAGMENT_CATEGORY = 5;
-    private static final int FRAGMENT_HOT = 6;
-
-    public Fragment getFragment(int pos) {
-        switch (pos) {
-            case FRAGMENT_HOME:
-                return new HomeFragment();
-            case FRAGMENT_APP:
-                return new AppFragment();
-            case FRAGMENT_GAME:
-                return new GameFragment();
-            case FRAGMENT_SUBJECT:
-                return new SubjectFragment();
-            case FRAGMENT_CATEGORY:
-                return new CategoryFragment();
-            case FRAGMENT_RECOMMEND:
-                return new RecommendFragment();
-            case FRAGMENT_HOT:
-                return new HotFragment();
-        }
-        return null;
-    }
+    public class FragmentFactory {
+	    public static final int FRAGMENT_HOME = 0;
+	    public static final int FRAGMENT_APP = 1;
+	    public static final int FRAGMENT_GAME = 2;
+	    public static final int FRAGMENT_SUBJECT = 3;
+	    public static final int FRAGMENT_RECOMMEND = 4;
+	    public static final int FRAGMENT_CATEGORY = 5;
+	    public static final int FRAGMENT_HOT = 6;
+	
+	    /**
+	     * @param position
+	     * @return 根据不同的位置返回不同的实例
+	     */
+	    public static Fragment getFragment(int position) {
+	        switch (position) {
+	            case FRAGMENT_HOME:
+	                return new HomeFragment();
+	            case FRAGMENT_APP:
+	                return new ApplicationFragment();
+	            case FRAGMENT_GAME:
+	                return new GameFragment();
+	            case FRAGMENT_SUBJECT:
+	                return new SubjectFragment();
+	            case FRAGMENT_RECOMMEND:
+	                return new RecommendFragment();
+	            case FRAGMENT_CATEGORY:
+	                return new CategoryFragment();
+	            case FRAGMENT_HOT:
+	                return new HotFragment();
+	        }
+	        return null;
+	    }
+	}
 
 
 例如： Retrofit里面的GsonConverterFactory 
 
 
 ### 单例模式 ###
-    public static HeiMaRetrofit getInstance() {
-        if (sHeiMaRetrofit == null) {
-            synchronized (HeiMaRetrofit.class) {
-                if (sHeiMaRetrofit == null) {
-                    sHeiMaRetrofit = new HeiMaRetrofit();
+
+    
+    public static NGYBRetrofit getInstance() {
+        if (ngybRetrofit == null) {
+            synchronized (NGYBRetrofit.class) {
+                if (ngybRetrofit == null) {
+                    ngybRetrofit = new NGYBRetrofit();
                 }
             }
         }
-        return sHeiMaRetrofit;
+        return ngybRetrofit;
     }
 
 
@@ -2142,8 +2628,7 @@ AlertDialog.Builder, Retrofit.Builder，OkHttp.Builder
 
 ### 适配器模式 ###
 
-	//接口适配
-	public abstract class PageChangeListenerAdapter implements ViewPager.OnPageChangeListener{
+    public class OnPageChangeListenerAdapter implements ViewPager.OnPageChangeListener {
 	    @Override
 	    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 	
@@ -2161,6 +2646,7 @@ AlertDialog.Builder, Retrofit.Builder，OkHttp.Builder
 	}
 
 
+
 ### 代理模式 ###
 
 
@@ -2168,31 +2654,32 @@ AlertDialog.Builder, Retrofit.Builder，OkHttp.Builder
 * Observable (被观察者)
 * Observer （被观察者）
 	
-		public class Teacher extends Observable {
-		
-		    public void publishMessage(String msg) {
-		        setChanged();
-		        notifyObservers(msg);
-		    }
-		}
 
-		public class Student implements Observer {
-		
-		    @Override
-		    public void update(Observable o, Object arg) {
-		        System.out.print(arg + "\n");
-		    }
-		}
 
-	    @Test
-	    public void testObserverPattern() {
-	        Student student1 = new Student();
-	        Student student2 = new Student();
-	        Teacher teacher = new Teacher();
-	        teacher.addObserver(student1);
-	        teacher.addObserver(student2);
-	        teacher.publishMessage("放假不解释");
+    public class Student  implements Observer {
+	    @Override
+	    public void update(Observable o, Object arg) {
+	        System.out.println("收到:"+arg);
 	    }
+	}
+
+    public class Teacher extends Observable {
+	    public void publishMessage(){
+	        setChanged();
+	        notifyObservers("放假了");
+	    }
+	}
+
+    
+    @Test
+    public void test() {
+        Teacher teacher = new Teacher();
+        Student student = new Student();
+        Student student1 = new Student();
+        teacher.addObserver(student);
+        teacher.addObserver(student1);
+        teacher.publishMessage();
+    }
 
 	类似接口回调，EventBus，广播
 

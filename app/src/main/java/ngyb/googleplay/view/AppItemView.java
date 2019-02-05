@@ -3,7 +3,6 @@ package ngyb.googleplay.view;
 import android.content.Context;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -16,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ngyb.googleplay.R;
 import ngyb.googleplay.bean.AppItemBean;
-import ngyb.googleplay.utils.Constant;
+import ngyb.googleplay.constant.Constant;
 
 /**
  * 作者：南宫燚滨

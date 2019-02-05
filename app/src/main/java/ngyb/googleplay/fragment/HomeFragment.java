@@ -1,7 +1,6 @@
 package ngyb.googleplay.fragment;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,7 +12,7 @@ import es.dmoral.toasty.Toasty;
 import ngyb.googleplay.R;
 import ngyb.googleplay.bean.HomeBean;
 import ngyb.googleplay.network.NGYBRetrofit;
-import ngyb.googleplay.utils.Constant;
+import ngyb.googleplay.constant.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,7 +59,6 @@ public class HomeFragment extends BaseAppListFragment {
                         }
                     }
                 }
-
             }
 
             @Override
@@ -82,5 +80,13 @@ public class HomeFragment extends BaseAppListFragment {
                 .setDotSelectedColor(getResources().getColor(R.color.colorPrimary))
                 .build();
         return funBanner;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getListAdapter()!=null){
+            getListAdapter().notifyDataSetChanged();
+        }
     }
 }

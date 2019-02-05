@@ -88,7 +88,6 @@ public abstract class BaseFragment extends Fragment {
      */
     public void onDataLoadFailed() {
         if (progressBar != null) {
-
             progressBar.setVisibility(View.GONE);
         }
         if (errorLayout != null) {

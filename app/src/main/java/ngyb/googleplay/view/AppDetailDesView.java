@@ -45,7 +45,6 @@ public class AppDetailDesView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.view_app_detail_des, this);
         ButterKnife.bind(this, this);
-
         //绘制流程没有走,测量没有走就没有高度
         expandHeight = appDesc.getMeasuredHeight();
         //视图树的观察者监听绘制流程中布局的完成
@@ -61,7 +60,6 @@ public class AppDetailDesView extends RelativeLayout {
                 }
             }
         });
-
     }
 
     public void bindView(AppDetailBean data) {

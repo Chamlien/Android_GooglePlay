@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ngyb.googleplay.R;
 import ngyb.googleplay.bean.AppDetailBean;
-import ngyb.googleplay.utils.Constant;
+import ngyb.googleplay.constant.Constant;
 
 /**
  * 作者：南宫燚滨
