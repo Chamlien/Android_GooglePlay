@@ -8,7 +8,8 @@
 
 # 服务器搭建 #
 
-[服务器你代码] (https://gitee.com/nangongyibin/Java_GooglePlayServer](https://gitee.com/nangongyibin/Java_GooglePlayServer) 
+[服务器代码](https://gitee.com/nangongyibin/Java_GooglePlayServer.git)
+
 
 
 * 文件说明
@@ -144,29 +145,32 @@ DrawerLayout里面的菜单布局我们可以自己定义，但谷歌也提供�
 ### ActionBar和DrawerLayout联动
 
     
-    private void initActionBar() {
-        //用Toolbar替换actionbar
-        setSupportActionBar(toolBar);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
-        supportActionBar.setTitle(getString(R.string.app_name));
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-        //同步状态
-        actionBarDrawerToggle.syncState();//根据DrawerLayout开关的状态来改变它的显示效果
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);//将侧滑滚动的状态通知actionBarDrawerToggle
-    }
+	    private void initActionBar() {
+	        //用Toolbar替换actionbar
+	        setSupportActionBar(toolBar);
+	        ActionBar supportActionBar = getSupportActionBar();
+	        supportActionBar.setDisplayHomeAsUpEnabled(true);
+	        supportActionBar.setTitle(getString(R.string.app_name));
+	        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+	        //同步状态
+	        actionBarDrawerToggle.syncState();//根据DrawerLayout开关的
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //封装了drawerLayout的打开和关闭
-                actionBarDrawerToggle.onOptionsItemSelected(item);
-//                drawerLayout.openDrawer(Gravity.START);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+----------
+状态来改变它的显示效果
+	        drawerLayout.addDrawerListener(actionBarDrawerToggle);//将侧滑滚动的状态通知actionBarDrawerToggle
+	    }
+	
+	    @Override
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	        switch (item.getItemId()) {
+	            case android.R.id.home:
+	                //封装了drawerLayout的打开和关闭
+	                actionBarDrawerToggle.onOptionsItemSelected(item);
+	//                drawerLayout.openDrawer(Gravity.START);
+	                break;
+	        }
+	        return super.onOptionsItemSelected(item);
+	    }
 
 
 ## ToolBar ##
@@ -1959,7 +1963,7 @@ DownloadManger完成对应用下载的管理，使用单例模式。
         if (file.exists()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //大于等于版本7.0
-                uri = FileProvider.getUriForFile(context, "cqq.googleplay.fileprovider", file);
+                uri = FileProvider.getUriForFile(context, "ngyb.googleplay.fileprovider", file);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//暂时授权获取apk文件
             } else {
                 uri = Uri.fromFile(file);
@@ -1974,7 +1978,7 @@ DownloadManger完成对应用下载的管理，使用单例模式。
     
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="cqq.googleplay.fileprovider"
+            android:authorities="ngyb.googleplay.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -2323,7 +2327,7 @@ DownloadManger完成对应用下载的管理，使用单例模式。
 
 # 多线程下载 #
 
-##线程运行机制
+## 线程运行机制 ##
 
 * 单核cpu，同一时刻只能处理一个线程，多核cpu同一时刻可以处理多个线程
 * 操作系统为每个运行线程安排一定的CPU时间----`时间片`，系统通过一种循环的方式为线程提供时间片，线程在自己的时间内运行，因为时间相当短，多个线程频繁地发生切换，因此给用户的感觉就是好像多个线程同时运行一样。
@@ -2361,7 +2365,7 @@ Android中耗时的操作，都会开子线程，线程的创建和销毁是要�
 	                              BlockingQueue<Runnable> workQueue，//任务队列
 	                              ThreadFactory threadFactory，//线程工厂
 	                              RejectedExecutionHandler handler) //异常的捕捉器
-###构造相关参数解释
+### 构造相关参数解释 ###
 * corePoolSize：`核心池的大小`，这个参数跟后面讲述的线程池的实现原理有非常大的关系。在创建了线程池后，默认情况下，线程池中并没有任何线程，而是等待有任务到来才创建线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，从这2个方法的名字就可以看出，是预创建线程的意思，即在没有任务到来之前就创建corePoolSize个线程或者一个线程。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中；
 * maximumPoolSize：`线程池最大线程数`，这个参数也是一个非常重要的参数，它表示在线程池中最多能创建多少个线程；
 * keepAliveTime：`表示线程没有任务执行时最多保持多久时间会终止`。默认情况下，只有当线程池中的线程数大于corePoolSize时，keepAliveTime才会起作用，直到线程池中的线程数不大于corePoolSize，即当线程池中的线程数大于corePoolSize时，如果一个线程空闲的时间达到keepAliveTime，则会终止，直到线程池中的线程数不超过corePoolSize。但是如果调用了allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；
@@ -2387,7 +2391,7 @@ Android中耗时的操作，都会开子线程，线程的创建和销毁是要�
 		ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）
 		ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务 
 
-###基础API的介绍
+### 基础API的介绍 ###
 * isShutdown() ： 判断线程池是否关闭
 * isTerminated() : 判断线程池中任务是否执行完成
 * shutdown() : 调用后不再接收新任务，如果里面有任务，就执行完
@@ -2396,7 +2400,7 @@ Android中耗时的操作，都会开子线程，线程的创建和销毁是要�
 * execute() : 执行任务
 
 
-###任务提交给线程池之后的处理策略
+### 任务提交给线程池之后的处理策略 ### 
 1. 如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建新的线程执行这个任务；
 2. 如果当前线程池中的线程数目等于corePoolSize，则每来一个任务，会尝试将其添加到任务缓存队列当中
 	1. 若添加成功，则该任务会等待空闲线程将其取出去执行；
@@ -2404,7 +2408,7 @@ Android中耗时的操作，都会开子线程，线程的创建和销毁是要�
 3. 如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；
 4. 如果线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止，直至线程池中的线程数目不大于corePoolSize；如果允许为核心池中的线程设置存活时间，那么核心池中的线程空闲时间超过keepAliveTime，线程也会被终止。
 
-###任务提交给线程池之后的处理策略（比喻）
+### 任务提交给线程池之后的处理策略（比喻）###
 假如有一个工厂，工厂里面有10(`corePoolSize`)个工人，每个工人同时只能做一件任务。因此只要当10个工人中有工人是空闲的，`来了任务就分配`给空闲的工人做；
 当10个工人都有任务在做时，如果还来了任务，就把任务进行排队等待(`任务队列`)；如果说新任务数目增长的速度远远大于工人做任务的速度，那么此时工厂主管可能会想补救措施，比如重新招4个临时工人(`创建新线程`)进来；然后就将任务也分配给这4个临时工人做；
 如果说着14个工人做任务的速度还是不够，此时工厂主管可能就要考虑不再接收新的任务或者抛弃前面的一些任务了(`拒绝执行`)。
@@ -2433,7 +2437,7 @@ Android中耗时的操作，都会开子线程，线程的创建和销毁是要�
 	* `SynchronousQueue(直接提交策略)`: 交替队列，`队列中操作时必须是先放进去，接着取出来`，交替着去处理元素的添加和移除，这是一个很有意思的阻塞队列，其中每个插入操作必须等待另一个线程的移除操作，同样任何一个移除操作都等待另一个线程的插入操作。因此此队列内部其 实没有任何一个元素，或者说容量是0，严格说并不是一种容器。由于队列没有容量，因此不能调用peek操作，因为只有移除元素时才有元素。
  
 ## RejectedExecutionHandler介绍
-###实现的子类介绍
+### 实现的子类介绍 ###
 
 * ThreadPoolExecutor.AbortPolicy 
 	>当添加任务出错时的策略捕获器，如果出现错误，则直接`抛出异常`
@@ -2656,30 +2660,30 @@ AlertDialog.Builder, Retrofit.Builder，OkHttp.Builder
 	
 
 
-    public class Student  implements Observer {
-	    @Override
-	    public void update(Observable o, Object arg) {
-	        System.out.println("收到:"+arg);
+        public class Student  implements Observer {
+		    @Override
+		    public void update(Observable o, Object arg) {
+		        System.out.println("收到:"+arg);
+		    }
+		}
+	
+	    public class Teacher extends Observable {
+		    public void publishMessage(){
+		        setChanged();
+		        notifyObservers("放假了");
+		    }
+		}
+	
+	    
+	    @Test
+	    public void test() {
+	        Teacher teacher = new Teacher();
+	        Student student = new Student();
+	        Student student1 = new Student();
+	        teacher.addObserver(student);
+	        teacher.addObserver(student1);
+	        teacher.publishMessage();
 	    }
-	}
-
-    public class Teacher extends Observable {
-	    public void publishMessage(){
-	        setChanged();
-	        notifyObservers("放假了");
-	    }
-	}
-
-    
-    @Test
-    public void test() {
-        Teacher teacher = new Teacher();
-        Student student = new Student();
-        Student student1 = new Student();
-        teacher.addObserver(student);
-        teacher.addObserver(student1);
-        teacher.publishMessage();
-    }
 
 	类似接口回调，EventBus，广播
 
@@ -2689,4 +2693,4 @@ AlertDialog.Builder, Retrofit.Builder，OkHttp.Builder
 效果图:
 
 
-![](https://github.com/nangongyibin7219/GooglePlayN/blob/master/aa.gif)
+![](https://github.com/nangongyibin7219/Android_GooglePlay/blob/master/1.gif?raw=true)

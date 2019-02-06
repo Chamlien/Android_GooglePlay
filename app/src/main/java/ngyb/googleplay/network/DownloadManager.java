@@ -182,7 +182,7 @@ public class DownloadManager {
         if (file.exists()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //大于等于版本7.0
-                uri = FileProvider.getUriForFile(context, "cqq.googleplay.fileprovider", file);
+                uri = FileProvider.getUriForFile(context, "ngyb.googleplay.fileprovider", file);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//暂时授权获取apk文件
             } else {
                 uri = Uri.fromFile(file);
